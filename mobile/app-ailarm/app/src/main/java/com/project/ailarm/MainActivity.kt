@@ -3,45 +3,26 @@ package com.project.ailarm
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.project.ailarm.model.AlarmItem
+import com.project.ailarm.ui.screens.AlarmListScreen
 import com.project.ailarm.ui.theme.AilarmTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             AilarmTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                val sample = listOf(
+                    AlarmItem("07:00 a.m.", listOf("Diaria", "Despertar")),
+                    AlarmItem("07:15 a.m.", listOf("Diaria", "Medicamento")),
+                    AlarmItem("05:00 p.m.", listOf("L, M, X, V", "Ejercicio")),
+                )
+                AlarmListScreen(
+                    alarms = sample,
+                    onAddAlarm = { /* TODO */ },
+                    onMicClick = { /* TODO */ }
+                )
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AilarmTheme {
-        Greeting("Android")
     }
 }
