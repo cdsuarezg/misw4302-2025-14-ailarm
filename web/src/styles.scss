@@ -2,11 +2,12 @@
 // Custom Theming for Angular Material v19
 // For more information: https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+@use 'sass:color';
 
 // Incluir el core de Angular Material (IMPORTANTE)
 @include mat.core();
 
-// Definir colores personalizados
+// Colores personalizados
 $primary-color: #3A506B;
 $secondary-color: #A29BFE;
 $accent-color: #9B59B6;
@@ -18,25 +19,6 @@ $warning-color: #FFD93D;
 
 // Usar tema básico de Angular Material y personalizar con CSS
 html {
-  @include mat.theme((
-    color: (
-      theme-type: light,
-      primary: mat.$violet-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: (
-      brand-family: 'Roboto',
-      plain-family: 'Roboto',
-    ),
-    density: (
-      scale: 0,
-    ),
-  ));
-
-  @include mat.icon-overrides((
-    color: $primary-color,
-  ));
-
   // Variables CSS personalizadas para sobrescribir los colores de Material
   --mdc-theme-primary: #{$primary-color};
   --mdc-theme-secondary: #{$accent-color};
@@ -55,15 +37,34 @@ html {
   --warning-color: #{$warning-color};
   
   // Colores con opacidad para efectos
-  --primary-light: #{lighten($primary-color, 20%)};
-  --primary-dark: #{darken($primary-color, 20%)};
-  --accent-light: #{lighten($accent-color, 20%)};
-  --accent-dark: #{darken($accent-color, 20%)};
+  --primary-light: #{color.adjust($primary-color, $lightness: 20%)};
+  --primary-dark: #{color.adjust($primary-color, $lightness: -20%)};
+  --accent-light: #{color.adjust($accent-color, $lightness: 20%)};
+  --accent-dark: #{color.adjust($accent-color, $lightness: -20%)};
   
   // Sombras personalizadas
-  --shadow-light: 0 2px 4px rgba(#{red($primary-color)}, #{green($primary-color)}, #{blue($primary-color)}, 0.1);
-  --shadow-medium: 0 4px 8px rgba(#{red($primary-color)}, #{green($primary-color)}, #{blue($primary-color)}, 0.15);
-  --shadow-heavy: 0 8px 16px rgba(#{red($primary-color)}, #{green($primary-color)}, #{blue($primary-color)}, 0.2);
+  --shadow-light: 0 2px 4px rgba(#{color.channel($primary-color, "red", $space: rgb)}, #{color.channel($primary-color, "green", $space: rgb)}, #{color.channel($primary-color, "blue", $space: rgb)}, 0.1);
+  --shadow-medium: 0 4px 8px rgba(#{color.channel($primary-color, "red", $space: rgb)}, #{color.channel($primary-color, "green", $space: rgb)}, #{color.channel($primary-color, "blue", $space: rgb)}, 0.15);
+  --shadow-heavy: 0 8px 16px rgba(#{color.channel($primary-color, "red", $space: rgb)}, #{color.channel($primary-color, "green", $space: rgb)}, #{color.channel($primary-color, "blue", $space: rgb)}, 0.2);
+
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$violet-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: (
+      brand-family: 'Roboto',
+      plain-family: 'Roboto',
+    ),
+    density: (
+      scale: 0,
+    ),
+  ));
+
+  @include mat.icon-overrides((
+    color: $primary-color,
+  ));
 }
 
 /* Global styles */
