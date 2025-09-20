@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,6 +21,8 @@ interface Alarm {
   styleUrls: ['./alarms.component.scss']
 })
 export class AlarmsComponent {
+  private router = inject(Router);
+  
   alarms: Alarm[] = [
     {
       id: 1,
@@ -57,6 +60,14 @@ export class AlarmsComponent {
 
   onDeleteAlarm(alarm: Alarm): void {
     console.log('Eliminando alarma:', alarm);
+  }
+
+  onAddAlarm(): void {
+    // Navegar a la página de agregar alarma
+  }
+
+  onAddAlarmWithAI(): void {
+    this.router.navigate(['/alarm-with-ai']);
   }
 
   trackByAlarmId(index: number, alarm: Alarm): number {

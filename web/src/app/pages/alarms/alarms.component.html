@@ -35,7 +35,10 @@
     <div class="alarms-actions__action">
       <span class="mat-title-medium alarms-actions__action-text">Agregar alarma</span>
       <div class="alarms-actions__action-btn">
-        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+        <button 
+          mat-icon-button 
+          aria-label="Agregar alarma"
+          (click)="onAddAlarm()">
           <mat-icon>add_2</mat-icon>
         </button>
       </div>
@@ -44,7 +47,10 @@
     <div class="alarms-actions__action">
       <span class="mat-title-medium alarms-actions__action-text">Agregar alarma con IA</span>
       <div class="alarms-actions__action-btn">
-        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+        <button 
+          mat-icon-button 
+          aria-label="Agregar alarma con IA"
+          (click)="onAddAlarmWithAI()">
           <mat-icon>mic</mat-icon>
         </button>
       </div>
