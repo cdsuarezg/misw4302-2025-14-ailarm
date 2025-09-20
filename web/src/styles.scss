@@ -4,10 +4,10 @@
 @use '@angular/material' as mat;
 @use 'sass:color';
 
-// Incluir el core de Angular Material (IMPORTANTE)
+// Incluir el core de Angular Material
 @include mat.core();
 
-// Colores personalizados
+// Colores principales
 $primary-color: #3A506B;
 $secondary-color: #A29BFE;
 $accent-color: #9B59B6;
@@ -17,7 +17,6 @@ $error-color: #D88C8C;
 $success-color: #6BCF7F;
 $warning-color: #FFD93D;
 
-// Usar tema básico de Angular Material y personalizar con CSS
 html {
   // Variables CSS personalizadas para sobrescribir los colores de Material
   --mdc-theme-primary: #{$primary-color};
@@ -67,14 +66,24 @@ html {
   ));
 }
 
-/* Global styles */
+// Estilos globales
 html, body { 
   height: 100%; 
   margin: 0; 
-  padding: 1rem;
+  padding: 1.5rem 3rem;
 }
 
-// Clases de tipografía Material Design 3 - FUNCIONALES
+body { 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// Clases de tipografía Material Design 3
 .mat-display-large {
   font-family: 'Roboto', sans-serif !important;
   font-size: 3.5rem !important;
@@ -174,16 +183,6 @@ html, body {
   margin: 0 !important;
 }
 
-body { 
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: $background-color;
-  color: $text-color;
-}
-
-* {
-  box-sizing: border-box;
-}
-
 // Clases utilitarias para colores personalizados
 .text-primary { color: var(--primary-color) !important; }
 .text-secondary { color: var(--secondary-color) !important; }
@@ -196,22 +195,27 @@ body {
   background-color: var(--primary-color) !important; 
   color: white;
 }
+
 .bg-secondary { 
   background-color: var(--secondary-color) !important; 
   color: white;
 }
+
 .bg-accent { 
   background-color: var(--accent-color) !important; 
   color: white;
 }
+
 .bg-success { 
   background-color: var(--success-color) !important; 
   color: white;
 }
+
 .bg-warning { 
   background-color: var(--warning-color) !important; 
   color: black;
 }
+
 .bg-error { 
   background-color: var(--error-color) !important; 
   color: white;
