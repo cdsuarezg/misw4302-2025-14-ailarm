@@ -37,10 +37,10 @@ fun RecordVoiceOverlay(
     onBack: () -> Unit,
     onSave: () -> Unit,
     micTint: Color,
-    scrimBase: Color = Color(0xFFF6F6F6),   // mismo fondo de pantalla
-    scrimTargetAlpha: Float = 0.04f         // súper sutil (ajusta 0.02–0.08)
+    scrimBase: Color = Color(0xFFF6F6F6),
+    scrimTargetAlpha: Float = 0.04f
 ) {
-    // animaciones de entrada/salida
+
     var mounted by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) { mounted = true }
 
@@ -59,7 +59,7 @@ fun RecordVoiceOverlay(
         animationSpec = tween(220, easing = FastOutSlowInEasing), label = "cardElev"
     )
 
-    // Overlay de pantalla completa con scrim claro y bloqueo de toques
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -120,13 +120,6 @@ fun RecordVoiceOverlay(
     }
 }
 
-/**
- * Loader con dos arcos animados. Pásale los colores que ya usas en tu tema.
- *
- * @param size tamaño total (ej. 120.dp)
- * @param dark color del arco oscuro (ej. ActionIcon)
- * @param light color del arco claro (ej. #B1AAFF)
- */
 @Composable
 fun DualArcLoader(
     size: Dp,
