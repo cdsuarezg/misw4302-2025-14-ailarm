@@ -1,0 +1,66 @@
+// Clases utilitarias para colores de texto personalizados
+.text-primary { 
+  color: var(--primary-color) !important; 
+}
+
+.text-secondary { 
+  color: var(--secondary-color) !important; 
+}
+
+.text-accent { 
+  color: var(--accent-color) !important; 
+}
+
+.text-success { 
+  color: var(--success-color) !important; 
+}
+
+.text-warning { 
+  color: var(--warning-color) !important; 
+}
+
+.text-error { 
+  color: var(--error-color) !important; 
+}
+
+// Clases utilitarias para fondos con colores personalizados
+.bg-primary { 
+  background-color: var(--primary-color) !important; 
+  color: white;
+}
+
+.bg-secondary { 
+  background-color: var(--secondary-color) !important; 
+  color: white;
+}
+
+.bg-accent { 
+  background-color: var(--accent-color) !important; 
+  color: white;
+}
+
+.bg-success { 
+  background-color: var(--success-color) !important; 
+  color: white;
+}
+
+.bg-warning { 
+  background-color: var(--warning-color) !important; 
+  color: black;
+}
+
+.bg-error { 
+  background-color: var(--error-color) !important; 
+  color: white;
+}
+
+// Clases para gradientes
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  color: white;
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+  color: white;
+}
