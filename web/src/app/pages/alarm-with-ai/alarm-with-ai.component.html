@@ -19,7 +19,9 @@
   </div>
 </div>
 
-<div class="spinner" *ngIf="isRecording">
-  <mat-spinner diameter="100"></mat-spinner>
-  <p class="mat-body-large spinner-text">Procesando alarma y almacenando</p>
-</div>
+<!-- Componente spinner reutilizable -->
+<app-loading-spinner 
+  [isVisible]="isRecording"
+  message="Procesando alarma y almacenando"
+  [diameter]="100">
+</app-loading-spinner>
