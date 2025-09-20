@@ -1,0 +1,80 @@
+@use '@angular/material' as mat;
+
+.alarms {
+  padding-top: 4rem;
+
+  @include mat.card-overrides((outlined-container-color: "#FFFFFF",
+    ));
+
+  &-title {
+    color: var(--text-color);
+    font-weight: 500 !important;
+  }
+
+  &-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    max-width: 100%;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
+
+    &__card {
+      padding: 1rem 0.5rem 0.4rem;
+      width: 70%;
+      min-height: 120px;
+
+      @media (min-width: 768px) {
+        width: 70%;
+      }
+
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+
+      &-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.7rem;
+      }
+    }
+  }
+
+  &-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+
+    &__action {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+
+      button {
+        background-color: var(--accent-color);
+        height: 55px;
+        width: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .mat-icon {
+          color: white;
+        }
+      }
+    }
+  }
+}

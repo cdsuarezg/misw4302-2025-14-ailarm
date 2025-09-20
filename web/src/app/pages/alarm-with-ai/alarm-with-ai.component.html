@@ -1,0 +1,27 @@
+<div class="alarm-with-ai">
+  <h3 class="mat-headline-medium alarm-with-ai__title">Configuración automatica de alarma</h3>
+  <p class="mat-body-large alarm-with-ai__description">A partir de este momento podrá decir lo que desea para que la
+    inteligencia artificial lo interprete, por ejemplo: programa una alarma para las 8 mañana y pon una etiqueta que
+    diga preparar desayuno, que se active de lunes a viernes, a partir de mañana y compártela con todo el grupo en el
+    que me encuentro utiliza cualquier sonido que encuentres por defecto.</p>
+  <p class="mat-body-large alarm-with-ai__description">Cuando este listo puede tocar el botón que dice <b>grabar</b>.
+  </p>
+
+  <div class="alarm-with-ai__actions">
+    <button class="alarm-with-ai__actions-back" mat-button="outlined" (click)="goBack()" [disabled]="isRecording">
+      Atrás
+    </button>
+    <button class="alarm-with-ai__actions-record" mat-button="tonal" (click)="startRecording()"
+      [disabled]="isRecording">
+      <mat-icon aria-label="Grabar" font-icon="mic">mic</mat-icon>
+      {{ isRecording ? 'Grabando...' : 'Grabar' }}
+    </button>
+  </div>
+</div>
+
+<!-- Componente spinner reutilizable -->
+<app-loading-spinner 
+  [isVisible]="isRecording"
+  message="Procesando alarma y almacenando"
+  [diameter]="100">
+</app-loading-spinner>

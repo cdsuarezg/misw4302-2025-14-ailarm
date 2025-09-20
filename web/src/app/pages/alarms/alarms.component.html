@@ -1,0 +1,59 @@
+<div class="alarms">
+  <h3 class="mat-display-medium alarms-title">Mis alarmas</h3>
+
+  <div class="alarms-list">
+    <mat-card class="alarms-list__card" appearance="outlined" *ngFor="let alarm of alarms; trackBy: trackByAlarmId">
+      <mat-card-content>
+        <div class="alarms-list__card-header">
+          <h4 class="mat-headline-large">{{ alarm.time }}</h4>
+
+          <div>
+            <button mat-icon-button aria-label="Editar alarma" (click)="onEditAlarm(alarm)">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button mat-icon-button aria-label="Compartir alarma" (click)="onShareAlarm(alarm)">
+              <mat-icon>share</mat-icon>
+            </button>
+
+            <button mat-icon-button aria-label="Eliminar alarma" (click)="onDeleteAlarm(alarm)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="alarms-list__card-chips">
+          <mat-chip-set aria-label="Etiquetas de alarma">
+            <mat-chip *ngFor="let label of alarm.labels">{{ label }}</mat-chip>
+          </mat-chip-set>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="alarms-actions">
+    <div class="alarms-actions__action">
+      <span class="mat-title-medium alarms-actions__action-text">Agregar alarma</span>
+      <div class="alarms-actions__action-btn">
+        <button 
+          mat-icon-button 
+          aria-label="Agregar alarma"
+          (click)="onAddAlarm()">
+          <mat-icon>add_2</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="alarms-actions__action">
+      <span class="mat-title-medium alarms-actions__action-text">Agregar alarma con IA</span>
+      <div class="alarms-actions__action-btn">
+        <button 
+          mat-icon-button 
+          aria-label="Agregar alarma con IA"
+          (click)="onAddAlarmWithAI()">
+          <mat-icon>mic</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

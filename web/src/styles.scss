@@ -2,11 +2,15 @@
 // Custom Theming for Angular Material v19
 // For more information: https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+@use 'sass:color';
+@use './styles/typography.scss';
+@use './styles/snackbar.scss';
+@use './styles/utils.scss';
 
-// Incluir el core de Angular Material (IMPORTANTE)
+// Incluir el core de Angular Material
 @include mat.core();
 
-// Definir colores personalizados
+// Colores principales
 $primary-color: #3A506B;
 $secondary-color: #A29BFE;
 $accent-color: #9B59B6;
@@ -16,8 +20,35 @@ $error-color: #D88C8C;
 $success-color: #6BCF7F;
 $warning-color: #FFD93D;
 
-// Usar tema básico de Angular Material y personalizar con CSS
 html {
+  // Variables CSS personalizadas para sobrescribir los colores de Material
+  --mdc-theme-primary: #{$primary-color};
+  --mdc-theme-secondary: #{$accent-color};
+  --mdc-theme-surface: #{$background-color};
+  --mdc-theme-on-surface: #{$text-color};
+  --mdc-theme-error: #{$error-color};
+  
+  // Variables personalizadas para usar en componentes
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --accent-color: #{$accent-color};
+  --background-color: #{$background-color};
+  --text-color: #{$text-color};
+  --error-color: #{$error-color};
+  --success-color: #{$success-color};
+  --warning-color: #{$warning-color};
+  
+  // Colores con opacidad para efectos
+  --primary-light: #{color.adjust($primary-color, $lightness: 20%)};
+  --primary-dark: #{color.adjust($primary-color, $lightness: -20%)};
+  --accent-light: #{color.adjust($accent-color, $lightness: 20%)};
+  --accent-dark: #{color.adjust($accent-color, $lightness: -20%)};
+  
+  // Sombras personalizadas
+  --shadow-light: 0 2px 4px rgba(#{color.channel($primary-color, "red", $space: rgb)}, #{color.channel($primary-color, "green", $space: rgb)}, #{color.channel($primary-color, "blue", $space: rgb)}, 0.1);
+  --shadow-medium: 0 4px 8px rgba(#{color.channel($primary-color, "red", $space: rgb)}, #{color.channel($primary-color, "green", $space: rgb)}, #{color.channel($primary-color, "blue", $space: rgb)}, 0.15);
+  --shadow-heavy: 0 8px 16px rgba(#{color.channel($primary-color, "red", $space: rgb)}, #{color.channel($primary-color, "green", $space: rgb)}, #{color.channel($primary-color, "blue", $space: rgb)}, 0.2);
+
   @include mat.theme((
     color: (
       theme-type: light,
@@ -37,140 +68,18 @@ html {
     color: $primary-color,
   ));
 
-  // Variables CSS personalizadas para sobrescribir los colores de Material
-  --mdc-theme-primary: #{$primary-color};
-  --mdc-theme-secondary: #{$accent-color};
-  --mdc-theme-surface: #{$background-color};
-  --mdc-theme-on-surface: #{$text-color};
-  --mdc-theme-error: #{$error-color};
-  
-  // Variables personalizadas para usar en componentes
-  --primary-color: #{$primary-color};
-  --secondary-color: #{$secondary-color};
-  --accent-color: #{$accent-color};
-  --background-color: #{$background-color};
-  --text-color: #{$text-color};
-  --error-color: #{$error-color};
-  --success-color: #{$success-color};
-  --warning-color: #{$warning-color};
-  
-  // Colores con opacidad para efectos
-  --primary-light: #{lighten($primary-color, 20%)};
-  --primary-dark: #{darken($primary-color, 20%)};
-  --accent-light: #{lighten($accent-color, 20%)};
-  --accent-dark: #{darken($accent-color, 20%)};
-  
-  // Sombras personalizadas
-  --shadow-light: 0 2px 4px rgba(#{red($primary-color)}, #{green($primary-color)}, #{blue($primary-color)}, 0.1);
-  --shadow-medium: 0 4px 8px rgba(#{red($primary-color)}, #{green($primary-color)}, #{blue($primary-color)}, 0.15);
-  --shadow-heavy: 0 8px 16px rgba(#{red($primary-color)}, #{green($primary-color)}, #{blue($primary-color)}, 0.2);
+  @include mat.chips-overrides((
+    outline-color: $secondary-color,
+    elevated-container-color: $secondary-color,
+    label-text-color: $text-color,
+  ));
 }
 
-/* Global styles */
+// Estilos globales
 html, body { 
   height: 100%; 
   margin: 0; 
-  padding: 1rem;
-}
-
-// Clases de tipografía Material Design 3 - FUNCIONALES
-.mat-display-large {
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 3.5rem !important;
-  font-weight: 400 !important;
-  line-height: 4rem !important;
-  letter-spacing: -0.25px !important;
-  margin: 0 !important;
-}
-
-.mat-display-medium {
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 2.8rem !important;
-  font-weight: 400 !important;
-  line-height: 3.2rem !important;
-  letter-spacing: 0px !important;
-  margin: 0 !important;
-}
-
-.mat-headline-large {
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 2rem !important;
-  font-weight: 500 !important;
-  line-height: 2.5rem !important;
-  letter-spacing: 0px !important;
-  margin: 0 !important;
-}
-
-.mat-headline-medium {
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 1.75rem !important;
-  font-weight: 500 !important;
-  line-height: 2.25rem !important;
-  letter-spacing: 0px !important;
-  margin: 0 !important;
-}
-
-.mat-headline-small {
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 1.5rem !important;
-  font-weight: 500 !important;
-  line-height: 2rem !important;
-  letter-spacing: 0px !important;
-  margin: 0 !important;
-}
-
-.mat-title-large {
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 1.375rem !important;
-  font-weight: 500 !important;
-  line-height: 1.75rem !important;
-  letter-spacing: 0px !important;
-  margin: 0 !important;
-}
-
-.mat-title-medium {
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 1.125rem !important;
-  font-weight: 500 !important;
-  line-height: 1.5rem !important;
-  letter-spacing: 0.15px !important;
-  margin: 0 !important;
-}
-
-.mat-body-large {
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 1rem !important;
-  font-weight: 400 !important;
-  line-height: 1.5rem !important;
-  letter-spacing: 0.5px !important;
-  margin: 0 !important;
-}
-
-.mat-body-medium {
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 0.875rem !important;
-  font-weight: 400 !important;
-  line-height: 1.25rem !important;
-  letter-spacing: 0.25px !important;
-  margin: 0 !important;
-}
-
-.mat-body-small {
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 0.75rem !important;
-  font-weight: 400 !important;
-  line-height: 1rem !important;
-  letter-spacing: 0.4px !important;
-  margin: 0 !important;
-}
-
-.mat-label-large {
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 0.875rem !important;
-  font-weight: 500 !important;
-  line-height: 1.25rem !important;
-  letter-spacing: 0.1px !important;
-  margin: 0 !important;
+  padding: 1.5rem 3rem;
 }
 
 body { 
@@ -181,49 +90,5 @@ body {
 
 * {
   box-sizing: border-box;
-}
-
-// Clases utilitarias para colores personalizados
-.text-primary { color: var(--primary-color) !important; }
-.text-secondary { color: var(--secondary-color) !important; }
-.text-accent { color: var(--accent-color) !important; }
-.text-success { color: var(--success-color) !important; }
-.text-warning { color: var(--warning-color) !important; }
-.text-error { color: var(--error-color) !important; }
-
-.bg-primary { 
-  background-color: var(--primary-color) !important; 
-  color: white;
-}
-.bg-secondary { 
-  background-color: var(--secondary-color) !important; 
-  color: white;
-}
-.bg-accent { 
-  background-color: var(--accent-color) !important; 
-  color: white;
-}
-.bg-success { 
-  background-color: var(--success-color) !important; 
-  color: white;
-}
-.bg-warning { 
-  background-color: var(--warning-color) !important; 
-  color: black;
-}
-.bg-error { 
-  background-color: var(--error-color) !important; 
-  color: white;
-}
-
-// Clases para gradientes
-.bg-gradient-primary {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-  color: white;
-}
-
-.bg-gradient-secondary {
-  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
-  color: white;
 }
 
