@@ -58,3 +58,22 @@
     }
   }
 }
+
+.ailarm-snackbar-success {
+  background-color: #7c4dff !important;  // violeta de tu paleta
+  color: #fff !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+
+  .custom-snackbar__message {
+    color: #fff !important;
+    font-size: 0.95rem;
+  }
+
+  .custom-snackbar__action-btn,
+  .custom-snackbar__close-btn mat-icon {
+    color: #fff !important;
+  }
+}

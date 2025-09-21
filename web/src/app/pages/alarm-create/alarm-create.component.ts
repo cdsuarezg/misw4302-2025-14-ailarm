@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +13,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { FrequencyDialogComponent } from '../../dialogs/frequency-dialog/frequency-dialog.component';
 import { SoundDialogComponent } from '../../dialogs/sound-dialog/sound-dialog.component';
 import { AlarmsService } from '../../services/alarms.service';
+import { CustomSnackbarComponent } from '../../components/custom-snackbar/custom-snackbar.component';
+
 
 @Component({
   selector: 'app-alarm-create',
@@ -32,11 +34,10 @@ export class AlarmCreateComponent {
   weekdays: number[] = [1,2,3,4,5]; 
   label = '';
   sound = 'Sound 2';
-
+  private snackBar = inject(MatSnackBar)
   constructor(
     private router: Router,
     private dialog: MatDialog,
-    private snack: MatSnackBar,
     private alarms: AlarmsService
   ) {}
 
@@ -64,7 +65,18 @@ export class AlarmCreateComponent {
       label: this.label || 'Alarma',
       sound: this.sound,
     });
-    this.snack.open('Tu alarma acaba de quedar configurada de forma exitosa.', 'OK', { duration: 2500 });
+    
+    this.snackBar.openFromComponent(CustomSnackbarComponent, {
+        data: {
+          message: `Tu alarma para las ${this.time} ${this.meridiem} está configurada y compartida con tu grupo`,
+          action: '',
+          showCloseIcon: true,
+        },
+        duration: 5000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+        panelClass: ['snackbar-success']
+      });
     this.router.navigateByUrl('/alarms');
   }
 
