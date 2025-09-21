@@ -1,0 +1,178 @@
+/* ===== Variables (déjalas aquí o pon color directo) ===== */
+:host {
+  --tpd-accent: #7c4dff;        /* violeta Ailarm */
+}
+:root{
+  --tpd-bg: #fff;
+  --tpd-border: #d8deea;
+  --tpd-outline: #cfd6e4;
+  --tpd-face: #f3f6fb;
+  --tpd-text: #2e3440;
+  --tpd-muted: #6b7280;
+  --tpd-ink: #24364a;
+  --tpd-font: 'Roboto', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --tpd-digit-weight: 600; 
+  --tpd-divider: 2px; 
+   --tpd-clock-d: 340px;    /* diámetro de la esfera */
+  --tpd-number-r: 144px;   /* radio de números */
+  --tpd-hand-l: 156px;     /* longitud de aguja */
+  --tpd-bubble: 54px;
+  --tpd-box-w: 128px;
+  --tpd-box-h: 72px;
+  --tpd-radius: 18px;
+}
+
+/* ===== Contenedor con borde visible ===== */
+.tpd{
+  width: 300px;                    /* más ancho para el layout grande */
+  max-width: calc(100vw - 40px);   /* por si la pantalla es estrecha */
+  border-radius: 24px;
+  background: var(--tpd-bg);
+  border: 1px solid #000;          /* ⬅️ borde negro */
+  box-shadow: 0 10px 28px rgba(0,0,0,.18);
+  padding: 16px 16px 12px;         /* más “respiro” interno */
+}
+
+/* ===== Cabecera ===== */
+.tpd__header{ color: var(--tpd-muted); font-size: 12px; margin-bottom: 6px; }
+
+/* ===== Display superior (horas:min) ===== */
+.tpd__display{ display:flex; align-items:center; gap:16px; justify-content:center; margin-bottom:16px; }
+.tpd__digit{
+  font-family: var(--tpd-font);
+  font-weight: var(--tpd-digit-weight); 
+  font-size: 34px; color: var(--tpd-text);
+  background: #f1f3f7; border: 1px solid var(--tpd-outline);
+  border-radius: 10px; padding: 6px 8px; width: 64px; text-align:center;
+}
+.tpd__digit.active{ outline: 2px solid var(--tpd-accent); }
+.tpd__colon{ font-size: 22px; color:#8b93a7; }
+
+/* ===== AM / PM (siempre visibles) ===== */
+.tpd__period {
+  margin-left: 6px; /* como lo tenías */
+}
+
+.tpd__period--split {
+  display: flex;
+  flex-direction: column;
+  width: 76px;                /* ajusta si quieres más ancho */
+  border: 2px solid var(--tpd-outline-strong);
+  border-radius: 14px;
+  overflow: hidden;           /* para que el radio recorte las mitades */
+  box-shadow: 0 1px 0 rgba(0,0,0,.03) inset;
+}
+
+/* Mitades (AM y PM) */
+.tpd__seg {
+  appearance: none;
+  border: 0;
+  background: #f7f9fc;        /* mitad inactiva */
+  color: #2e3440;
+  font-weight: 800;           /* sube/baja si la quieres más ligera */
+  line-height: 1;
+  padding: 10px 0;            /* alto de cada mitad */
+  cursor: pointer;
+}
+
+.tpd__seg.active {
+  background: var(--tpd-accent);  /* mitad activa en violeta */
+  color: #fff;
+}
+
+/* Divisor horizontal */
+.tpd__seg-divider {
+  height: 2px;
+  background: var(--tpd-outline-strong);
+}
+
+/* Accesibilidad visual al foco con teclado */
+.tpd__seg:focus-visible {
+  outline: 2px solid rgba(124,77,255,.5);
+  outline-offset: -2px; /* queda dentro del borde */
+}
+
+/* ===== Esfera del reloj ===== */
+.tpd__clock{
+  position:relative;
+  margin: 10px auto 6px;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background: var(--tpd-face);
+  border: 1px solid var(--tpd-outline);
+  overflow: visible;   /* por si la burbuja se acerca al borde */
+}
+
+.tpd__num,.tpd__num-label{
+  position:absolute; left:50%; top:50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* por defecto por debajo de la aguja */
+}
+.tpd__num{ width:0; height:0; }
+.tpd__num-label{
+  color:#6b7280; font-size: 14px; font-weight:700;
+  --deg: calc((var(--i) * 30deg) - 90deg);
+  transform: translate(-50%, -50%) rotate(var(--deg)) translate(96px) rotate(calc(-1 * var(--deg)));
+  transition: color .15s ease;
+}
+.tpd__num-label.is-active{
+  color: #fff !important;
+  z-index: 4;                                  /* por encima de la aguja */
+  text-shadow: 0 1px 0 rgba(0,0,0,.28),
+               0 0 1px rgba(0,0,0,.12);       /* mejor lectura sobre el fondo */
+}
+
+/* ===== Aguja (ahora por encima y visible) ===== */
+.tpd__hand{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  /* longitud de la aguja */
+  --hand-l: 96px;
+  width: var(--hand-l);
+  height: 0;
+  transform-origin: 0 50%;   /* el origen es el centro del reloj */
+  z-index: 3;                /* encima de números */
+  pointer-events: none;
+}
+
+.tpd__hand-line{
+  position: absolute;
+  left: 0;                   /* arranca en el centro del reloj */
+  top: 50%;
+  width: var(--hand-l);
+  height: 3px;
+  background: #3A506B;
+  border-radius: 2px;
+  transform: translateY(-50%); /* ya no usamos translateX(-50%) */
+}
+
+.tpd__hand-bubble{
+  position: absolute;
+  left: var(--hand-l);        /* en el extremo de la aguja */
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 3px solid var(--tpd-ink);
+  background: #3A506B;
+  transform: translate(-50%, -50%);
+}
+
+.tpd__hand-dot{
+  position: absolute;
+  left: -6px;                /* centrado sobre el eje */
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #3A506B;
+  transform: translateY(-50%);
+}
+
+/* ===== Acciones (violeta en “Cancelar”) ===== */
+.tpd__actions{
+  display:flex; justify-content: flex-end; gap: 20px; padding: 6px 12px 10px;
+}
+.tpd__actions .cancel{ color: var(--tpd-accent) !important; font-weight:700; }
+.tpd__actions .ok{ color: var(--tpd-text); font-weight:800; }

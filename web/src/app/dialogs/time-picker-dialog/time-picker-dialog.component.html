@@ -1,0 +1,76 @@
+<div class="tpd">
+  <div class="tpd__header">Seleccionar tiempo</div>
+
+  <div class="tpd__display">
+    <button class="tpd__digit" [class.active]="picking==='hour'" (click)="selectPicking('hour')">
+      {{ displayHour }}
+    </button>
+    <span class="tpd__colon">:</span>
+    <button class="tpd__digit" [class.active]="picking==='minute'" (click)="selectPicking('minute')">
+      {{ displayMinute }}
+    </button>
+
+    <div class="tpd__period tpd__period--split" role="group" aria-label="AM o PM">
+  <button
+    type="button"
+    class="tpd__seg"
+    [class.active]="period==='AM'"
+    [attr.aria-pressed]="period==='AM' ? 'true' : 'false'"
+    (click)="setPeriod('AM')">
+    AM
+  </button>
+
+  <div class="tpd__seg-divider" aria-hidden="true"></div>
+
+  <button
+    type="button"
+    class="tpd__seg"
+    [class.active]="period==='PM'"
+    [attr.aria-pressed]="period==='PM' ? 'true' : 'false'"
+    (click)="setPeriod('PM')">
+    PM
+  </button>
+</div>
+  </div>
+
+  <div #clock class="tpd__clock"
+       (mousedown)="startDrag($event)" (mouseup)="endDrag()"
+       (touchstart)="startDrag($event)" (touchend)="endDrag()"
+       (click)="onClockClick($event)">
+
+    
+    <ng-container *ngIf="picking === 'hour'; else minutesTpl">
+    <ng-container *ngFor="let n of [12,1,2,3,4,5,6,7,8,9,10,11]; let i = index">
+        <div class="tpd__num" [style.--i]="i"></div>
+        <div class="tpd__num-label"
+            [style.--i]="i"
+            [class.is-active]="(hour % 12 === 0 ? 12 : hour) === n">
+        {{ n }}
+        </div>
+    </ng-container>
+    </ng-container>
+
+
+    <ng-template #minutesTpl>
+    <ng-container *ngFor="let step of [0,5,10,15,20,25,30,35,40,45,50,55]; let i = index">
+        <div class="tpd__num" [style.--i]="i"></div>
+        <div class="tpd__num-label"
+            [style.--i]="i"
+            [class.is-active]="minute === step">
+        {{ step < 10 ? '0' + step : step }}
+        </div>
+    </ng-container>
+    </ng-template>
+
+    <div class="tpd__hand" [style.transform]="'rotate(' + handAngle + 'deg)'">
+      <div class="tpd__hand-line"></div>
+      <div class="tpd__hand-bubble"></div> 
+      <div class="tpd__hand-dot"></div>   
+    </div>
+  </div>
+
+  <div class="tpd__actions">
+    <button mat-button class="cancel" (click)="cancel()">Cancelar</button>
+    <button mat-button class="ok" (click)="ok()">OK</button>
+  </div>
+</div>

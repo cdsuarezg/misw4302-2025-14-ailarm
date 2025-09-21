@@ -1,22 +1,29 @@
 :root {
   --ailarm-outline: #cfd6e4;
-  --ailarm-outline-focus: #7c4dff; // tu violeta
+  --ailarm-outline-focus: #7c4dff; 
   --ailarm-bg: #fff;
+  --btn-primary-enabled: #7c4dff;   
+  --btn-primary-hover:   #A29BFE;
+  --btn-primary-disabled:#e7e2ff;   
+
+  --btn-ghost-border: #d3d6e3;      
+  --btn-ghost-hover:  #f7f7fb; 
 }
 
 .page {
   max-width: 980px;
   margin: 24px auto;
   padding: 0 16px;
+  
 }
 
-/* Título izquierdo + texto auxiliar alineado con él a la derecha */
+
 .header-grid {
   display: grid;
-  grid-template-columns: 280px 460px; /* izq: labels, der: inputs */
+  grid-template-columns: 280px 460px; 
   gap: 12px 164px;
   align-items: end;
-  justify-content: center; /* 👈 centra toda la grilla */
+  justify-content: center; 
   margin-bottom: 8px;
 
   .title {
@@ -35,21 +42,19 @@
 
 .form-grid {
   display: grid;
-  grid-template-columns: 280px 460px; /* 👈 inputs con ancho fijo */
+  grid-template-columns: 280px 460px; 
   gap: 18px 164px;
   align-items: center;
-  justify-content: center; /* 👈 centra la grilla completa */
+  justify-content: center; 
 }
 
 
-/* Columna de etiquetas a la izquierda */
 .label {
   color: #3e4451;
   font-weight: 600;
   justify-self: start;
 }
 
-/* Campo a la derecha con outline y radio */
 .ailarm-field {
   width: 100%;
 
@@ -75,7 +80,6 @@
 
 .clickable { cursor: pointer; .mat-mdc-input-element { cursor: pointer; } }
 
-/* Botones centrados respecto al bloque de formulario (spanean ambas columnas) */
 .actions {
   grid-column: 1 / -1;
   display: flex;
@@ -84,28 +88,57 @@
   margin-top: 20px;
 }
 
-/* Estilo botones */
-.btn-cancel {
-  background: #f1f2f5;
-  color: #2b2f36;
-  border-radius: 10px;
-  padding: .55rem 1.2rem;
-  font-weight: 500;
-}
-.btn-save {
-  background: var(--ailarm-outline-focus);
-  color: #fff;
-  border-radius: 10px;
-  padding: .55rem 1.2rem;
-  font-weight: 600;
+:host .ailarm-btn{
+  border-radius: 18px;
+  height: 42px;
+  padding: 0 18px;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 42px;
 }
 
-/* Responsive: apilar en móviles manteniendo jerarquía visual */
-@media (max-width: 920px) {
-  .header-grid,
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-  .header-grid .helper { text-align: left; }
-  .label { margin-top: 6px; }
+:host .ailarm-btn--primary{
+  background: #A29BFE;
+  color: #f6f5f5;
+
+  --mdc-filled-button-container-color: var(--btn-primary-enabled);
+  --mdc-filled-button-label-text-color: #00000074;  
+}
+:host .ailarm-btn--primary:hover:not(:disabled){
+  background: #A29BFE;
+}
+
+:host .ailarm-btn--primary:disabled,
+:host .ailarm-btn--primary[disabled]{
+  background: var(--btn-primary-disabled) !important;
+  color: #767584 !important;
+  box-shadow: none !important;
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+:host .ailarm-btn--ghost{
+  background: #ffffff00;
+  border: 1px solid #3c3c3c;
+  color: #3c3c3c;
+
+  --mdc-outlined-button-outline-color: var(--btn-ghost-border);
+  --mdc-outlined-button-outline-width: 2px;
+  --mdc-outlined-button-label-text-color: #000;
+}
+
+:host .ailarm-btn--ghost.mat-mdc-stroked-button.mat-primary{
+  color: #000 !important;
+  --mdc-outlined-button-label-text-color: #000 !important;
+}
+
+:host .ailarm-btn--ghost:hover{
+  background: var(--btn-ghost-hover);
+  border-color: #c7cad8;
+}
+
+:host .ailarm-btn:focus-visible{
+  outline: 0;
+  box-shadow: 0 0 0 3px #A29BFE;
 }

@@ -14,6 +14,7 @@ import { FrequencyDialogComponent } from '../../dialogs/frequency-dialog/frequen
 import { SoundDialogComponent } from '../../dialogs/sound-dialog/sound-dialog.component';
 import { AlarmsService } from '../../services/alarms.service';
 import { CustomSnackbarComponent } from '../../components/custom-snackbar/custom-snackbar.component';
+import { TimePickerDialogComponent, TimeResult } from '../../dialogs/time-picker-dialog/time-picker-dialog.component';
 
 
 @Component({
@@ -42,7 +43,8 @@ export class AlarmCreateComponent {
   ) {}
 
   pickFrequency() {
-    const ref = this.dialog.open(FrequencyDialogComponent, { data: { selected: this.weekdays } });
+    const ref = this.dialog.open(FrequencyDialogComponent, { data: { selected: this.weekdays },
+      panelClass: 'ailarm-dialog' });
     ref.afterClosed().subscribe((w: number[]|undefined) => {
       if (!w) return;
       this.weekdays = w;
@@ -53,8 +55,19 @@ export class AlarmCreateComponent {
   }
 
   pickSound() {
-    const ref = this.dialog.open(SoundDialogComponent, { data: { selected: this.sound } });
+    const ref = this.dialog.open(SoundDialogComponent, { data: { selected: this.sound }, 
+      panelClass: 'ailarm-dialog' });
     ref.afterClosed().subscribe((s?: string) => { if (s) this.sound = s; });
+  }
+
+  openTimePicker() {
+    console.log('[timepicker] abrir');
+    const ref = this.dialog.open<TimePickerDialogComponent, { defaultTime: string }, TimeResult>(
+      TimePickerDialogComponent,
+      { data: { defaultTime: this.time },
+        panelClass: 'ailarm-dialog'}
+    );
+    ref.afterClosed().subscribe(res => { if (res?.time) this.time = res.time; });
   }
 
   save() {
@@ -83,4 +96,13 @@ export class AlarmCreateComponent {
   cancel() {
     this.router.navigateByUrl('/alarms');
   }
+
+  get isFormComplete(): boolean {
+  return Boolean(
+    this.time &&
+    this.frequencyLabel &&
+    this.sound &&
+    this.label?.trim().length // etiqueta no vacía ni solo espacios
+  );
+}
 }
