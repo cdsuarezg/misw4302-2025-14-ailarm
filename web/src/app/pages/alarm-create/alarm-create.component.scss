@@ -1,45 +1,61 @@
 :root {
-  --ailarm-outline: #cfd6e4;     // borde normal
-  --ailarm-outline-focus: #7c4dff; // borde en foco (ajústalo al morado de tu marca)
-  --ailarm-bg: #ffffff;
+  --ailarm-outline: #cfd6e4;
+  --ailarm-outline-focus: #7c4dff; // tu violeta
+  --ailarm-bg: #fff;
 }
 
-.page { max-width: 820px; margin: 24px auto; padding: 0 16px; }
+.page {
+  max-width: 980px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+/* Título izquierdo + texto auxiliar alineado con él a la derecha */
+.header-grid {
+  display: grid;
+  grid-template-columns: 280px 460px; /* izq: labels, der: inputs */
+  gap: 12px 164px;
+  align-items: end;
+  justify-content: center; /* 👈 centra toda la grilla */
+  margin-bottom: 8px;
+
+  .title {
+    margin: 0;
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .helper {
+    margin: 0;
+    color: #6b7280;
+    text-align: left;
+    font-size: 14px;
+  }
+}
+
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  max-width: 420px;
-}
-.full { justify-content: space-between; display: flex; width: 100%; }
-.meridiem { margin-left: 8px; font-weight: 600; }
-.actions { margin-top: 24px; display: flex; gap: 8px; }
-
-
-.page { max-width: 980px; margin: 24px auto; padding: 0 16px; }
-
-.ailarm-form {
-  display: grid;
-  grid-template-columns: 220px 420px;
-  gap: 18px 24px;
+  grid-template-columns: 280px 460px; /* 👈 inputs con ancho fijo */
+  gap: 18px 164px;
   align-items: center;
-  margin-top: 8px;
+  justify-content: center; /* 👈 centra la grilla completa */
 }
 
+
+/* Columna de etiquetas a la izquierda */
 .label {
   color: #3e4451;
   font-weight: 600;
+  justify-self: start;
 }
 
+/* Campo a la derecha con outline y radio */
 .ailarm-field {
   width: 100%;
 
-  // altura y padding
   .mat-mdc-form-field-flex { min-height: 42px; align-items: center; }
   .mat-mdc-form-field-infix { padding: .35rem .75rem !important; }
   .mat-mdc-input-element { padding: 0 !important; }
-
-  // fondo y borde
   .mdc-text-field--outlined { background: var(--ailarm-bg); border-radius: 10px; }
   .mdc-notched-outline__leading,
   .mdc-notched-outline__trailing {
@@ -47,32 +63,49 @@
     border-width: 1px;
     border-radius: 10px;
   }
-
-  // foco
   &.mat-focused .mdc-notched-outline__leading,
   &.mat-focused .mdc-notched-outline__trailing {
     border-color: var(--ailarm-outline-focus) !important;
     border-width: 2px;
   }
-
-  // íconos de sufijo
   .mat-mdc-form-field-icon-suffix .mat-icon {
-    font-size: 20px;
-    height: 20px; width: 20px; line-height: 20px;
+    font-size: 20px; height: 20px; width: 20px; line-height: 20px;
   }
 }
 
-// hace que el field se comporte como botón (para Frecuencia/Sonido)
-.clickable {
-  cursor: pointer;
-  .mat-mdc-input-element { cursor: pointer; }
+.clickable { cursor: pointer; .mat-mdc-input-element { cursor: pointer; } }
+
+/* Botones centrados respecto al bloque de formulario (spanean ambas columnas) */
+.actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-// botones (por si aún no los tenías)
-.actions { margin-top: 28px; display: flex; gap: 10px; }
+/* Estilo botones */
 .btn-cancel {
-  background: #f1f2f5; color: #2b2f36; border-radius: 10px; padding: .55rem 1.2rem; font-weight: 500;
+  background: #f1f2f5;
+  color: #2b2f36;
+  border-radius: 10px;
+  padding: .55rem 1.2rem;
+  font-weight: 500;
 }
 .btn-save {
-  background: var(--ailarm-outline-focus); color: #fff; border-radius: 10px; padding: .55rem 1.2rem; font-weight: 600;
+  background: var(--ailarm-outline-focus);
+  color: #fff;
+  border-radius: 10px;
+  padding: .55rem 1.2rem;
+  font-weight: 600;
+}
+
+/* Responsive: apilar en móviles manteniendo jerarquía visual */
+@media (max-width: 920px) {
+  .header-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .header-grid .helper { text-align: left; }
+  .label { margin-top: 6px; }
 }

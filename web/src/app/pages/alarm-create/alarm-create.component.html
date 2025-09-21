@@ -1,38 +1,45 @@
 <div class="page">
-  <h2>Agregar alarma</h2>
+  <div class="header-grid">
+    <h2 class="title">Agregar alarma</h2>
+    <p class="helper">Completa los campos para configurar tu alarma</p>
+  </div>
 
-  <div class="ailarm-form">
-    
+  <div class="form-grid">
+    <!-- Hora -->
     <div class="label">Hora de alarma</div>
     <mat-form-field appearance="outline" class="ailarm-field">
-      <input matInput type="time" [(ngModel)]="time">
+      <input matInput type="time" [(ngModel)]="time" />
       <button mat-icon-button matSuffix (click)="$event.stopPropagation()">
         <mat-icon>calendar_today</mat-icon>
       </button>
     </mat-form-field>
-    
+
+    <!-- Frecuencia -->
     <div class="label">Frecuencia</div>
     <mat-form-field appearance="outline" class="ailarm-field clickable"
-                     (click)="pickFrequency()" role="button" tabindex="0">
-      <input matInput [value]="frequencyLabel" readonly>
+      (click)="pickFrequency()" role="button" tabindex="0">
+      <input matInput [value]="frequencyLabel" readonly />
       <mat-icon matSuffix>expand_more</mat-icon>
     </mat-form-field>
-    
+
+    <!-- Etiqueta -->
     <div class="label">Etiqueta</div>
     <mat-form-field appearance="outline" class="ailarm-field">
-      <input matInput [(ngModel)]="label" placeholder="Ingrese etiqueta">
+      <input matInput [(ngModel)]="label" placeholder="Ingrese etiqueta" />
     </mat-form-field>
 
+    <!-- Sonido -->
     <div class="label">Sonido</div>
     <mat-form-field appearance="outline" class="ailarm-field clickable"
-                     (click)="pickSound()" role="button" tabindex="0">
-      <input matInput [value]="sound" readonly>
+      (click)="pickSound()" role="button" tabindex="0">
+      <input matInput [value]="sound" readonly />
       <mat-icon matSuffix>expand_more</mat-icon>
     </mat-form-field>
-  </div>
 
-  <div class="actions">
-    <button mat-button class="btn-cancel" (click)="cancel()">Cancelar</button>
-    <button mat-raised-button class="btn-save" (click)="save()">Guardar</button>
+    <!-- Acciones (centradas) -->
+    <div class="actions">
+      <button mat-button class="btn-cancel" (click)="cancel()">Cancelar</button>
+      <button mat-raised-button class="btn-save" (click)="save()">Guardar</button>
+    </div>
   </div>
 </div>
