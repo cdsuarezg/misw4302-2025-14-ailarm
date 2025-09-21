@@ -1,0 +1,38 @@
+<div class="page">
+  <h2>Agregar alarma</h2>
+
+  <div class="ailarm-form">
+    
+    <div class="label">Hora de alarma</div>
+    <mat-form-field appearance="outline" class="ailarm-field">
+      <input matInput type="time" [(ngModel)]="time">
+      <button mat-icon-button matSuffix (click)="$event.stopPropagation()">
+        <mat-icon>calendar_today</mat-icon>
+      </button>
+    </mat-form-field>
+    
+    <div class="label">Frecuencia</div>
+    <mat-form-field appearance="outline" class="ailarm-field clickable"
+                     (click)="pickFrequency()" role="button" tabindex="0">
+      <input matInput [value]="frequencyLabel" readonly>
+      <mat-icon matSuffix>expand_more</mat-icon>
+    </mat-form-field>
+    
+    <div class="label">Etiqueta</div>
+    <mat-form-field appearance="outline" class="ailarm-field">
+      <input matInput [(ngModel)]="label" placeholder="Ingrese etiqueta">
+    </mat-form-field>
+
+    <div class="label">Sonido</div>
+    <mat-form-field appearance="outline" class="ailarm-field clickable"
+                     (click)="pickSound()" role="button" tabindex="0">
+      <input matInput [value]="sound" readonly>
+      <mat-icon matSuffix>expand_more</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="actions">
+    <button mat-button class="btn-cancel" (click)="cancel()">Cancelar</button>
+    <button mat-raised-button class="btn-save" (click)="save()">Guardar</button>
+  </div>
+</div>
