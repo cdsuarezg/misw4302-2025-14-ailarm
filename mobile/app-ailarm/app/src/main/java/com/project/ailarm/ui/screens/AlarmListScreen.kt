@@ -45,9 +45,7 @@ private enum class VoiceDialogState { Closed, Guide, Recording }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlarmListScreen(
-    alarms: List<AlarmItem>,
-    onAddAlarm: () -> Unit,
-    onMicClick: () -> Unit
+    alarms: List<AlarmItem>
 ) {
     val items = remember { mutableStateListOf<AlarmItem>().also { it.addAll(alarms) } }
 
@@ -55,8 +53,8 @@ fun AlarmListScreen(
     var saving by remember { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
-    val blur by animateDpAsState(targetValue = if (saving) 6.dp else 0.dp, label = "blur")
-    val scrimAlpha by animateFloatAsState(targetValue = if (saving) 0.12f else 0f, label = "scrim")
+//    val blur by animateDpAsState(targetValue = if (saving) 6.dp else 0.dp, label = "blur")
+//    val scrimAlpha by animateFloatAsState(targetValue = if (saving) 0.12f else 0f, label = "scrim")
     val blurAnim by animateDpAsState(
         targetValue = if (saving) 6.dp else 0.dp,
         animationSpec = tween(180, easing = FastOutSlowInEasing),
@@ -67,7 +65,6 @@ fun AlarmListScreen(
         animationSpec = tween(180, easing = FastOutSlowInEasing),
         label = "savingScrim"
     )
-
 
     suspend fun saveAlarm() {
         dialogState = VoiceDialogState.Closed
@@ -142,7 +139,6 @@ fun AlarmListScreen(
             ) {
                 HoverFab(
                     onClick = {
-                        onMicClick()
                         dialogState = VoiceDialogState.Guide
                     },
                     containerColor = Color.White,
@@ -154,7 +150,7 @@ fun AlarmListScreen(
                 }
                 // "+" manual
                 HoverFab(
-                    onClick = onAddAlarm,
+                    onClick = {},
                     containerColor = FabAddColor,
                     contentColor = Color.White
                 ) {
@@ -225,22 +221,5 @@ fun AlarmListScreen(
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun AlarmListScreenPreview() {
-    val sample = listOf(
-        AlarmItem("07:00 a.m.", listOf("Diaria", "Despertar")),
-        AlarmItem("07:15 a.m.", listOf("Diaria", "Medicamento")),
-        AlarmItem("05:00 p.m.", listOf("L, M, X, V", "Ejercicio")),
-    )
-    MaterialTheme {
-        AlarmListScreen(
-            alarms = sample,
-            onAddAlarm = {},
-            onMicClick = {}
-        )
     }
 }
