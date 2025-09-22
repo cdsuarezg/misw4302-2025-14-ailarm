@@ -9,16 +9,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
 import com.project.ailarm.model.AlarmItem
-import androidx.compose.material3.IconButtonDefaults
 import com.project.ailarm.ui.theme.ActionIcon
 
 @Composable
 fun AlarmCard(
     alarm: AlarmItem,
     modifier: Modifier = Modifier,
-    // Callbacks opcionales. Si son null, los botones se muestran deshabilitados.
+    // Callbacks opcionales: si son null, no hace nada al click (pero sí hay hover)
     onEdit: (() -> Unit)? = null,
     onDelete: (() -> Unit)? = null,
 ) {
@@ -40,28 +40,28 @@ fun AlarmCard(
                 )
                 Spacer(Modifier.weight(1f))
 
-                // Edit
-                IconButton(
-                    onClick = { onEdit?.invoke() ?: run {} },
-                    enabled = onEdit != null,
-                    colors = IconButtonDefaults.iconButtonColors(
-                        contentColor = ActionIcon,
-                        disabledContentColor = ActionIcon
-                    )
+                val iconColors = IconButtonDefaults.iconButtonColors(
+                    contentColor = ActionIcon,
+                    disabledContentColor = ActionIcon // mantenemos el mismo color establecido
+                )
+
+                // EDIT (hover activo aunque no haya callback, sin cambiar el color)
+                HoverIconButton(
+                    onClick = { onEdit?.invoke() ?: Unit },
+                    colors = iconColors,
+                    // apariencia de “deshabilitado” sin romper hover/press
+                    modifier = Modifier.alpha(if (onEdit == null) 0.55f else 1f)
                 ) {
-                    Icon(imageVector = Icons.Outlined.Edit, contentDescription = "Editar")
+                    Icon(Icons.Outlined.Edit, contentDescription = "Editar")
                 }
 
-                // Delete
-                IconButton(
-                    onClick = { onDelete?.invoke() ?: run {} },
-                    enabled = onDelete != null,
-                    colors = IconButtonDefaults.iconButtonColors(
-                        contentColor = ActionIcon,
-                        disabledContentColor = ActionIcon
-                    )
+                // DELETE (mismo criterio)
+                HoverIconButton(
+                    onClick = { onDelete?.invoke() ?: Unit },
+                    colors = iconColors,
+                    modifier = Modifier.alpha(if (onDelete == null) 0.55f else 1f)
                 ) {
-                    Icon(imageVector = Icons.Outlined.Delete, contentDescription = "Eliminar")
+                    Icon(Icons.Outlined.Delete, contentDescription = "Eliminar")
                 }
             }
 

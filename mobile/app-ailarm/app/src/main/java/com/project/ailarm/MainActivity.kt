@@ -6,9 +6,12 @@ import androidx.activity.compose.setContent
 import com.project.ailarm.model.AlarmItem
 import com.project.ailarm.ui.screens.AlarmListScreen
 import com.project.ailarm.ui.theme.AilarmTheme
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContent {
             AilarmTheme {

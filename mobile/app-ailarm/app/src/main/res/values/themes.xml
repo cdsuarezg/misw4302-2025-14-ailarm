@@ -2,4 +2,10 @@
 <resources>
 
     <style name="Theme.Ailarm" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Ailarm.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#F6F6F6</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ailarm_logo</item>
+        <item name="windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
+        <item name="postSplashScreenTheme">@style/Theme.Ailarm</item>
+    </style>
 </resources>
