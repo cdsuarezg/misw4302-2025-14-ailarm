@@ -4,38 +4,32 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Mic
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.project.ailarm.R
 import com.project.ailarm.model.AlarmItem
 import com.project.ailarm.ui.components.AlarmCard
 import com.project.ailarm.ui.components.HoverFab
-import com.project.ailarm.ui.components.HoverIconButton
 import com.project.ailarm.ui.theme.ActionIcon
-import com.project.ailarm.ui.theme.AppBarTitle
-import com.project.ailarm.ui.theme.TitleGray
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import com.project.ailarm.ui.components.Header
+import com.project.ailarm.ui.theme.AccentColor
+import com.project.ailarm.ui.theme.SecondaryColor
 import com.project.ailarm.ui.theme.TextColor
+import com.project.ailarm.ui.theme.White
 
 private val ScreenBg = Color(0xFFF6F6F6)
 private val FabAddColor = Color(0xFF9C59B6)
@@ -47,7 +41,8 @@ private enum class VoiceDialogState { Closed, Guide, Recording }
 @Composable
 fun AlarmListScreen(
     alarms: List<AlarmItem>,
-    onAddAlarm: () -> Unit
+    onAddAlarm: () -> Unit,
+    showSnackbar: Boolean = false
 ) {
     val items = remember { mutableStateListOf<AlarmItem>().also { it.addAll(alarms) } }
 
@@ -78,15 +73,22 @@ fun AlarmListScreen(
         )
     }
 
+    LaunchedEffect(showSnackbar) {
+       if (showSnackbar == true) {
+           snackbarHostState.showSnackbar("Tu alarma para las 08:00 p.m. está lista", withDismissAction = true)
+       }
+    }
+
     Scaffold(
         containerColor = ScreenBg,
         snackbarHost = {
             SnackbarHost(snackbarHostState) { data ->
                 Snackbar(
                     snackbarData = data,
-                    containerColor = FabAddColor,
-                    contentColor = Color.White,
-                    actionColor = Color.White
+                    containerColor = AccentColor,
+                    contentColor = White,
+                    actionColor = White,
+                    actionContentColor = White,
                 )
             }
         },
@@ -167,9 +169,9 @@ fun AlarmListScreen(
                     onStart  = { dialogState = VoiceDialogState.Recording },
                     onBack   = { dialogState = VoiceDialogState.Guide },
                     onSave   = { scope.launch { saveAlarm() } },
-                    micTint  = FabAddColor,
+                    micTint  = SecondaryColor,
                     scrimBase = ScreenBg,
-                    scrimTargetAlpha = 0.04f
+                    scrimTargetAlpha = 0.04f,
                 )
             }
 

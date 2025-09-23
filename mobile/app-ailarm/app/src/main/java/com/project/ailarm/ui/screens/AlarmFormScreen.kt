@@ -2,6 +2,7 @@ package com.project.ailarm.ui.screens
 
 import TagField
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +18,7 @@ import com.project.ailarm.ui.components.DropdownField
 
 import com.project.ailarm.ui.components.Header
 import com.project.ailarm.ui.components.TimePicker
+import com.project.ailarm.ui.theme.SecondaryColor
 import com.project.ailarm.ui.theme.TextColor
 
 import java.time.LocalTime
@@ -24,6 +26,7 @@ import java.time.LocalTime
 @Composable
 fun AlarmFormScreen(
     onClickBackBtn: () -> Unit,
+    onClickSaveBtn: () -> Unit
 ) {
     var time by remember { mutableStateOf(LocalTime.of(20, 0)) }
     var frequency by remember { mutableStateOf("Diaria") }
@@ -43,7 +46,6 @@ fun AlarmFormScreen(
         ) {
             Column (
                 modifier = Modifier
-                    .padding(padding)
                     .padding(horizontal = 20.dp)
             ) {
                 Text(
@@ -54,14 +56,14 @@ fun AlarmFormScreen(
                         letterSpacing = 0.sp,
                         fontWeight = FontWeight.Normal
                     ),
-                    modifier = Modifier.padding(vertical = 12.dp, horizontal = 10.dp),
+                    modifier = Modifier.padding(vertical = 20.dp, horizontal = 10.dp),
                     color = TextColor
                 )
 
                 Text(
                     text = "Completa los campos para configurar tu alarma",
                     style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(vertical = 12.dp, horizontal = 10.dp),
+                    modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp),
                     color = TextColor
                 )
 
@@ -98,7 +100,34 @@ fun AlarmFormScreen(
                     label = "Sonido",
                     options = listOf("Nature", "Rainbow", "Tech", "Water")
                 )
+
+                Spacer(Modifier.height(20.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    OutlinedButton(
+                        onClick = { onClickBackBtn() },
+                        modifier = Modifier.height(50.dp).width(110.dp)
+                    ) {
+                        Text("Cancelar")
+                    }
+
+                    Spacer(Modifier.width(8.dp))
+
+                    Button(
+                        onClick = { onClickSaveBtn() },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = SecondaryColor,
+                            contentColor = TextColor
+                        ),
+                        modifier = Modifier.height(50.dp).width(110.dp)
+                    ) {
+                        Text("Guardar")
+                    }
+                }
+              }
             }
         }
-    }
 }
