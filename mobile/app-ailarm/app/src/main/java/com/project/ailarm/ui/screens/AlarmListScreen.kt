@@ -34,6 +34,7 @@ import com.project.ailarm.ui.theme.AppBarTitle
 import com.project.ailarm.ui.theme.TitleGray
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.project.ailarm.ui.components.Header
 
 private val ScreenBg = Color(0xFFF6F6F6)
 private val FabAddColor = Color(0xFF9C59B6)
@@ -42,10 +43,10 @@ private val MicBorderColor = Color(0xFFDBD7DF)
 
 private enum class VoiceDialogState { Closed, Guide, Recording }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlarmListScreen(
-    alarms: List<AlarmItem>
+    alarms: List<AlarmItem>,
+    onAddAlarm: () -> Unit
 ) {
     val items = remember { mutableStateListOf<AlarmItem>().also { it.addAll(alarms) } }
 
@@ -53,15 +54,13 @@ fun AlarmListScreen(
     var saving by remember { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
-//    val blur by animateDpAsState(targetValue = if (saving) 6.dp else 0.dp, label = "blur")
-//    val scrimAlpha by animateFloatAsState(targetValue = if (saving) 0.12f else 0f, label = "scrim")
     val blurAnim by animateDpAsState(
         targetValue = if (saving) 6.dp else 0.dp,
         animationSpec = tween(180, easing = FastOutSlowInEasing),
         label = "contentBlur"
     )
     val savingScrimAlpha by animateFloatAsState(
-        targetValue = if (saving) 0.06f else 0f,  // más sutil que antes
+        targetValue = if (saving) 0.06f else 0f,
         animationSpec = tween(180, easing = FastOutSlowInEasing),
         label = "savingScrim"
     )
@@ -69,7 +68,7 @@ fun AlarmListScreen(
     suspend fun saveAlarm() {
         dialogState = VoiceDialogState.Closed
         saving = true
-        delay(1600) // simulación de procesamiento
+        delay(1600)
         items.add(AlarmItem("08:00 p.m.", listOf("Diaria", "Descongelar el pollo")))
         saving = false
         snackbarHostState.showSnackbar(
@@ -91,46 +90,7 @@ fun AlarmListScreen(
             }
         },
         topBar = {
-            CenterAlignedTopAppBar(
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = ScreenBg,
-                    titleContentColor = MaterialTheme.colorScheme.onBackground
-                ),
-                title = {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.ailarm_logo),
-                            contentDescription = "Logo Ailarm",
-                            modifier = Modifier
-                                .width(98.dp)
-                                .height(91.dp),
-                            contentScale = ContentScale.Fit
-                        )
-                        Spacer(Modifier.width(4.dp))
-                        Text(
-                            text = "Ailarm",
-                            style = AppBarTitle,
-                            color = TitleGray,
-                            modifier = Modifier.offset(x = (-26).dp)
-                        )
-                    }
-                },
-                navigationIcon = {},
-                actions = {
-                    HoverIconButton(
-                        onClick = { /* TODO perfil */ },
-                        colors = IconButtonDefaults.iconButtonColors(
-                            contentColor = ActionIcon,
-                            disabledContentColor = ActionIcon
-                        )
-                    ) {
-                        Icon(Icons.Outlined.AccountCircle, contentDescription = "Perfil")
-                    }
-                }
-            )
+            Header()
         },
         floatingActionButton = {
             Row(
@@ -148,9 +108,10 @@ fun AlarmListScreen(
                 ) {
                     Icon(Icons.Outlined.Mic, contentDescription = "Voz")
                 }
-                // "+" manual
                 HoverFab(
-                    onClick = {},
+                    onClick = {
+                        onAddAlarm()
+                    },
                     containerColor = FabAddColor,
                     contentColor = Color.White
                 ) {

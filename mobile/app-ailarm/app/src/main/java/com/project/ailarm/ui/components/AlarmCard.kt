@@ -18,7 +18,6 @@ import com.project.ailarm.ui.theme.ActionIcon
 fun AlarmCard(
     alarm: AlarmItem,
     modifier: Modifier = Modifier,
-    // Callbacks opcionales: si son null, no hace nada al click (pero sí hay hover)
     onEdit: (() -> Unit)? = null,
     onDelete: (() -> Unit)? = null,
 ) {

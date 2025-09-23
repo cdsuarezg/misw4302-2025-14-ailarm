@@ -11,6 +11,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.project.ailarm.ui.screens.AlarmFormScreen
 
 
 class MainActivity : ComponentActivity() {
@@ -40,8 +41,14 @@ private fun App() {
     ) {
         composable("/alarms") {
             AlarmListScreen(
-                alarms
+                alarms,
+                onAddAlarm = {
+                    navController.navigate("/alarm-form")
+                }
             )
+        }
+        composable("/alarm-form") {
+            AlarmFormScreen()
         }
     }
 }
