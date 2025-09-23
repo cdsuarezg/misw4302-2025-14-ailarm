@@ -26,6 +26,7 @@ fun AlarmFormScreen(
 ) {
     var time by remember { mutableStateOf(LocalTime.of(20, 0)) }
     var frequency by remember { mutableStateOf("Diaria") }
+    var sound by remember { mutableStateOf("Nature") }
 
     Scaffold(
         topBar = {
@@ -76,6 +77,16 @@ fun AlarmFormScreen(
                     onSelect = { frequency = it },
                     label = "Frecuencia",
                     options = listOf("Diaria", "Semanal", "Mensual", "Personalizado")
+                )
+
+
+                Spacer(Modifier.height(20.dp))
+
+                DropdownField(
+                    value = sound,
+                    onSelect = { sound = it },
+                    label = "Sonido",
+                    options = listOf("Nature", "Rainbow", "Tech", "Water")
                 )
             }
         }
