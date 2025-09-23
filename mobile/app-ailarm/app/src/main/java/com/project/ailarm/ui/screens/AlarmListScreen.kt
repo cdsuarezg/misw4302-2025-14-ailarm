@@ -35,6 +35,7 @@ import com.project.ailarm.ui.theme.TitleGray
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import com.project.ailarm.ui.components.Header
+import com.project.ailarm.ui.theme.TextColor
 
 private val ScreenBg = Color(0xFFF6F6F6)
 private val FabAddColor = Color(0xFF9C59B6)
@@ -125,22 +126,26 @@ fun AlarmListScreen(
             Column(
                 modifier = Modifier
                     .padding(padding)
-                    .padding(horizontal = 12.dp)
+                    .padding(horizontal = 20.dp)
                     .fillMaxSize()
                     .blur(blurAnim)
                     .then(if (saving) Modifier.blur(6.dp) else Modifier)
             ) {
+                Spacer(Modifier.height(20.dp))
+
                 Text(
                     text = "Mis alarmas",
                     style = MaterialTheme.typography.titleLarge.copy(
                         fontSize = 22.sp,
                         lineHeight = 28.sp,
                         letterSpacing = 0.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Normal
                     ),
-                    modifier = Modifier.padding(vertical = 12.dp),
-                    color = MaterialTheme.colorScheme.onBackground
+                    modifier = Modifier.padding(vertical = 12.dp, horizontal = 10.dp),
+                    color = TextColor
                 )
+
+                Spacer(Modifier.height(20.dp))
 
                 items.forEach { alarm ->
                     AlarmCard(

@@ -26,11 +26,12 @@ val RobotoFamily = FontFamily(
 )
 
 val Typography = Typography(
-    bodyLarge = TextStyle(fontFamily = RobotoFamily, fontWeight = FontWeight.Normal, fontSize = 16.sp),
-    bodyMedium = TextStyle(fontFamily = RobotoFamily, fontWeight = FontWeight.Normal, fontSize = 14.sp),
-    titleMedium = TextStyle(fontFamily = RobotoFamily, fontWeight = FontWeight.Medium, fontSize = 16.sp),
-    headlineSmall = TextStyle(fontFamily = RobotoFamily, fontWeight = FontWeight.Bold, fontSize = 20.sp),
-    labelSmall = TextStyle(fontFamily = RobotoFamily, fontWeight = FontWeight.Medium, fontSize = 12.sp)
+    bodyLarge = TextStyle(fontFamily = RobotoFamily, fontWeight = FontWeight.Normal, fontSize = 16.sp, color = TextColor),
+    bodyMedium = TextStyle(fontFamily = RobotoFamily, fontWeight = FontWeight.Normal, fontSize = 14.sp, color = TextColor),
+    titleLarge = TextStyle(fontFamily = RobotoFamily, fontWeight = FontWeight.Medium, fontSize = 22.sp, color = TextColor),
+    titleMedium = TextStyle(fontFamily = RobotoFamily, fontWeight = FontWeight.Medium, fontSize = 16.sp, color = TextColor),
+    headlineSmall = TextStyle(fontFamily = RobotoFamily, fontWeight = FontWeight.Bold, fontSize = 20.sp, color = TextColor),
+    labelSmall = TextStyle(fontFamily = RobotoFamily, fontWeight = FontWeight.Medium, fontSize = 12.sp, color = TextColor)
 )
 
 val AppBarTitle = TextStyle(
@@ -38,5 +39,6 @@ val AppBarTitle = TextStyle(
     fontWeight = FontWeight.SemiBold,
     fontSize = 28.sp,
     lineHeight = 36.sp,
-    letterSpacing = 0.sp
+    letterSpacing = 0.sp,
+    color = TextColor,
 )
