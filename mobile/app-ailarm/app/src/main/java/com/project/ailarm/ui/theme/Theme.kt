@@ -2,16 +2,17 @@ package com.project.ailarm.ui.theme
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 private val LightColors = lightColorScheme(
-    primary = PrimaryPurple,
-    secondary = PrimaryPurple,
-    background = Lavender,
+    primary = PrimaryColor,
+    secondary = SecondaryColor,
+    background = BackgroundColor,
     surface = White,
     onPrimary = White,
     onSecondary = White,
-    onBackground = Black,
-    onSurface = Black,
+    onBackground = BackgroundColor,
+    onSurface = TextColor,
 )
 
 @Composable
@@ -19,6 +20,6 @@ fun AilarmTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = LightColors,
         typography = Typography,
-        content = content
+        content = content,
     )
 }
