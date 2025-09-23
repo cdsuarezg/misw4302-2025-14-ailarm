@@ -1,10 +1,14 @@
-<h2 mat-dialog-title>Escoge el sonido</h2>
-<div mat-dialog-content>
+<h2 class="dlg-title">Escoge el sonido</h2>
+
+<div class="group" mat-dialog-content>
   <mat-radio-group [(ngModel)]="selected">
-    <mat-radio-button *ngFor="let s of sounds" [value]="s">{{ s }}</mat-radio-button>
+    <mat-radio-button *ngFor="let s of sounds" [value]="s">
+      {{ s }}
+    </mat-radio-button>
   </mat-radio-group>
 </div>
-<div mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Atrás</button>
-  <button mat-raised-button color="primary" (click)="confirm()">Confirmar</button>
+
+<div class="dlg-actions" mat-dialog-actions>
+  <button mat-stroked-button class="ailarm-btn ailarm-btn--ghost" mat-dialog-close>Atrás</button>
+  <button mat-stroked-button class="ailarm-btn ailarm-btn--save" (click)="confirm()">Confirmar</button>
 </div>

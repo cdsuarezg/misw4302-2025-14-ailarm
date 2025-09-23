@@ -44,6 +44,7 @@ export class AlarmCreateComponent {
 
   pickFrequency() {
     const ref = this.dialog.open(FrequencyDialogComponent, { data: { selected: this.weekdays },
+      width: '350px',
       panelClass: 'ailarm-dialog' });
     ref.afterClosed().subscribe((w: number[]|undefined) => {
       if (!w) return;
@@ -56,6 +57,8 @@ export class AlarmCreateComponent {
 
   pickSound() {
     const ref = this.dialog.open(SoundDialogComponent, { data: { selected: this.sound }, 
+      width: '350px',
+      maxWidth: '92vw',
       panelClass: 'ailarm-dialog' });
     ref.afterClosed().subscribe((s?: string) => { if (s) this.sound = s; });
   }
@@ -81,7 +84,7 @@ export class AlarmCreateComponent {
     
     this.snackBar.openFromComponent(CustomSnackbarComponent, {
         data: {
-          message: `Tu alarma para las ${this.time} ${this.meridiem} está configurada y compartida con tu grupo`,
+          message: `Tu alarma para las ${this.time} ${this.meridiem} está configurada`,
           action: '',
           showCloseIcon: true,
         },

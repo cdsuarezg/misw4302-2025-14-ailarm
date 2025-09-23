@@ -12,7 +12,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./frequency-dialog.component.scss']
 })
 export class FrequencyDialogComponent {
-  weekdays = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  weekdays = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+  letters  = ['L','M','M','J','V','S','D'];
   selected: Set<number>;
 
   constructor(
@@ -21,6 +22,8 @@ export class FrequencyDialogComponent {
   ) {
     this.selected = new Set(data?.selected ?? []);
   }
+
+  trackByIndex = (i: number) => i;
 
   toggle(i: number) {
     this.selected.has(i) ? this.selected.delete(i) : this.selected.add(i);
@@ -32,5 +35,9 @@ export class FrequencyDialogComponent {
 
   all() {
     this.selected = new Set([0,1,2,3,4,5,6]);
+  }
+
+  onBack() {
+    this.ref.close(null); // o this.ref.close() si prefieres
   }
 }

@@ -1,2 +1,125 @@
+:host{
+  --ailarm-violet: #A29BFE;       
+  --row-sep: #e9edf5;
+  --avatar-bg: #eaecf2;
+  --avatar-fg: #515a6b;
 
-.weekday { padding: 4px 0; }
+  --btn-ghost-border: #d3d6e3;
+  --btn-ghost-hover:  #f7f7fb;
+
+  --btn-save-text:   #3C3C3C;
+  --btn-save-border: #3C3C3C;
+  --btn-save-hover:  #f7f7fb;
+  --list-ml: 25px;     
+  --row-pl: 10px;     
+  --avatar-col: 50px; 
+}
+
+:host .dlg-title{
+  text-align: left;
+  margin: 20px 8px 12px calc(var(--list-ml) + var(--row-pl));
+  padding: 0;
+  font-size: 22px;
+  font-weight: 400;    
+  line-height: 1.25;
+  max-width: 240px;
+}
+
+:host .days-list{
+  display: block;
+  margin: 4px 4px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+
+:host .day-row{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 44px 1fr auto; 
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  background: #fff;
+  border: 0;
+  border-bottom: 1px solid var(--row-sep);
+  text-align: left;
+  cursor: pointer;
+}
+:host .day-row:last-child{ border-bottom: 0; }
+
+:host .avatar{
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--avatar-bg);
+  color: var(--avatar-fg);
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+:host .label{
+  font-size: 16px;
+  color: #1f2937;
+}
+
+:host .row-check{
+  --mdc-checkbox-selected-icon-color: var(--ailarm-violet);
+  --mdc-checkbox-selected-hover-icon-color: var(--ailarm-violet);
+  --mdc-checkbox-selected-focus-icon-color: var(--ailarm-violet);
+  --mdc-checkbox-selected-pressed-icon-color: var(--ailarm-violet);
+  --mdc-checkbox-unselected-pressed-outline-color: #cfd6e4;
+  transform: scale(0.9);
+}
+
+:host .dlg-actions{
+  display: flex;
+  justify-content: flex-end; 
+  gap: 10px;
+  padding: 12px 30px 30px;
+}
+
+:host .ailarm-btn{
+  border-radius: 18px;
+  height: 42px;
+  padding: 0 18px;
+  font-weight: 700;
+  text-transform: none;
+  line-height: 42px;
+}
+
+:host .ailarm-btn--ghost{
+  background: #fff;
+  border: 1px solid var(--btn-ghost-border);
+  color: #1f2937;
+  --mdc-outlined-button-outline-color: var(--btn-ghost-border);
+  --mdc-outlined-button-outline-width: 2px;
+  --mdc-outlined-button-label-text-color: #1f2937;
+}
+:host .ailarm-btn--ghost:hover{
+  background: var(--btn-ghost-hover);
+  border-color: #c7cad8;
+}
+
+:host .ailarm-btn--save{
+  background: #fff;
+  color: var(--btn-save-text, #3C3C3C);
+  border: 1px solid var(--btn-ghost-border);                    
+  --mdc-outlined-button-outline-color: var(--btn-ghost-border); 
+  --mdc-outlined-button-outline-width: 2px;
+  --mdc-outlined-button-label-text-color: var(--btn-save-text, #3C3C3C);
+}
+:host .ailarm-btn--save:hover{
+  background: var(--btn-save-hover, #f7f7fb);
+}
+
+:host .ailarm-btn--primary{
+  background: #fff !important;
+  color: var(--btn-save-text, #3C3C3C) !important;
+  border: 1px solid var(--btn-ghost-border);         
+  --mdc-outlined-button-outline-color: var(--btn-ghost-border); 
+  --mdc-outlined-button-outline-width: 2px;
+  --mdc-outlined-button-label-text-color: var(--btn-save-text, #3C3C3C);
+}
