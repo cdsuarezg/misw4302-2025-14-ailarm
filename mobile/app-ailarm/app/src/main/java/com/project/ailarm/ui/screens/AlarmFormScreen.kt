@@ -8,10 +8,12 @@ import androidx.compose.ui.Modifier
 import com.project.ailarm.ui.components.Header
 
 @Composable
-fun AlarmFormScreen() {
+fun AlarmFormScreen(
+    onClickBackBtn: () -> Unit,
+) {
     Scaffold(
         topBar = {
-            Header(showAccountBtn = false, showBackBtn = true)
+            Header(showAccountBtn = false, showBackBtn = true, onClickBackBtn)
         }
     ) { padding ->
         Box(

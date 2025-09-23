@@ -34,7 +34,8 @@ import com.project.ailarm.ui.theme.TitleGray
 @Composable
 fun Header(
     showAccountBtn: Boolean = false,
-    showBackBtn: Boolean = false
+    showBackBtn: Boolean = false,
+    onClickBackBtn: () -> Unit
 ) {
     CenterAlignedTopAppBar(
         modifier = Modifier.padding(end = 20.dp, top = 30.dp),
@@ -67,7 +68,7 @@ fun Header(
         navigationIcon = {
             if (showBackBtn) {
                 HoverIconButton(
-                    onClick = { },
+                    onClick = { onClickBackBtn() },
                     colors = IconButtonDefaults.iconButtonColors(
                         contentColor = PrimaryColor,
                         disabledContentColor = PrimaryColor

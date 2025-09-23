@@ -48,7 +48,11 @@ private fun App() {
             )
         }
         composable("/alarm-form") {
-            AlarmFormScreen()
+            AlarmFormScreen(
+                onClickBackBtn = {
+                    navController.navigate("/alarms")
+                }
+            )
         }
     }
 }

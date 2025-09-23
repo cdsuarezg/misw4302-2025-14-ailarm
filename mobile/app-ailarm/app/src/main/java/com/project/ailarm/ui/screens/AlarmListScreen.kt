@@ -90,7 +90,7 @@ fun AlarmListScreen(
             }
         },
         topBar = {
-            Header(showAccountBtn = true)
+            Header(showAccountBtn = true, onClickBackBtn = {})
         },
         floatingActionButton = {
             Row(
