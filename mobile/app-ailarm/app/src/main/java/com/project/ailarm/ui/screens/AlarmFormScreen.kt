@@ -1,5 +1,6 @@
 package com.project.ailarm.ui.screens
 
+import TagField
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -27,6 +28,7 @@ fun AlarmFormScreen(
     var time by remember { mutableStateOf(LocalTime.of(20, 0)) }
     var frequency by remember { mutableStateOf("Diaria") }
     var sound by remember { mutableStateOf("Nature") }
+    var tags by remember { mutableStateOf(listOf("Alarma")) }
 
     Scaffold(
         topBar = {
@@ -79,6 +81,14 @@ fun AlarmFormScreen(
                     options = listOf("Diaria", "Semanal", "Mensual", "Personalizado")
                 )
 
+                Spacer(Modifier.height(20.dp))
+
+                TagField(
+                    tags = tags,
+                    onTagsChange = { tags = it },
+                    label = "Etiqueta",
+                    modifier = Modifier.fillMaxWidth()
+                )
 
                 Spacer(Modifier.height(20.dp))
 
