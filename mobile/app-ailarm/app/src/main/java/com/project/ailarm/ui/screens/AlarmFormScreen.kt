@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import com.project.ailarm.ui.components.DropdownField
 
 import com.project.ailarm.ui.components.Header
 import com.project.ailarm.ui.components.TimePicker
@@ -24,6 +25,7 @@ fun AlarmFormScreen(
     onClickBackBtn: () -> Unit,
 ) {
     var time by remember { mutableStateOf(LocalTime.of(20, 0)) }
+    var frequency by remember { mutableStateOf("Diaria") }
 
     Scaffold(
         topBar = {
@@ -60,9 +62,20 @@ fun AlarmFormScreen(
                     color = TextColor
                 )
 
+                Spacer(Modifier.height(20.dp))
+
                 TimePicker(
                     time = time,
                     onTimeChange = { time = it }
+                )
+
+                Spacer(Modifier.height(20.dp))
+
+                DropdownField(
+                    value = frequency,
+                    onSelect = { frequency = it },
+                    label = "Frecuencia",
+                    options = listOf("Diaria", "Semanal", "Mensual", "Personalizado")
                 )
             }
         }
