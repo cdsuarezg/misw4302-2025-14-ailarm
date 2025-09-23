@@ -1,11 +1,12 @@
 /* ===== Variables (déjalas aquí o pon color directo) ===== */
 :host {
-  --tpd-accent: #7c4dff;        /* violeta Ailarm */
+  --tpd-accent: #a29bfe;        /* violeta Ailarm */
 }
 :root{
   --tpd-bg: #fff;
   --tpd-border: #d8deea;
   --tpd-outline: #cfd6e4;
+  --tpd-outline-strong: #a29bfe;
   --tpd-face: #f3f6fb;
   --tpd-text: #2e3440;
   --tpd-muted: #6b7280;
@@ -56,8 +57,8 @@
 .tpd__period--split {
   display: flex;
   flex-direction: column;
-  width: 76px;                /* ajusta si quieres más ancho */
-  border: 2px solid var(--tpd-outline-strong);
+  width: 46px;                /* ajusta si quieres más ancho */
+  border: 1px solid;
   border-radius: 14px;
   overflow: hidden;           /* para que el radio recorte las mitades */
   box-shadow: 0 1px 0 rgba(0,0,0,.03) inset;

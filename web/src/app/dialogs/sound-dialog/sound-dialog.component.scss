@@ -1,55 +1,60 @@
-/* ===== Variables locales solo para este diálogo ===== */
 :host{
-  --violet: #A29BFE;           /* color de selección del radio */
+  --violet: #A29BFE;         
   --row-sep: #e9edf5;
 
-  /* offsets para alinear el título con la columna de los radios */
-  --group-ml: 36px;            /* margen izquierdo del contenido */
-  --btn-ghost-border: #d3d6e3;
-  --btn-ghost-hover:  #f7f7fb;
+  --avatar-bg: #eaecf2;
+  --avatar-fg: #515a6b;
 
-  /* Confirmar en blanco con borde y texto gris oscuro */
-  --btn-save-text:   #3C3C3C;
-  --btn-save-border: #3C3C3C;
-  --btn-save-hover:  #f7f7fb;
+  --btn-outline: #d1d5e5;
+  --btn-text:    #2f3136;
+  --btn-hover:   #f7f8fc;
 }
 
-/* ===== Título (alineado a la izquierda y con aire) ===== */
 :host .dlg-title{
   text-align: left;
-  margin: 30px 12px 10px var(--group-ml); /* alinea con el inicio de los radios */
+  margin: 34px 12px 10px 36px;
   padding: 0;
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.25;
 }
 
-/* ===== Contenido ===== */
-:host .group{
-  margin: 0 8px 0 ;
-}
+/* Contenedor de la lista */
+:host .list{ margin: 0 8px; }
+:host .s-list{ display:block; }
 
-/* Radio list estilo “lista” con separador fino */
-:host .mat-mdc-radio-button{
-  display: block;
-  padding: 12px 10px;
+/* Fila tipo frecuencia: avatar | texto | radio (derecha) */
+:host .row{
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 8px;
   border-bottom: 1px solid var(--row-sep);
+  cursor: pointer;
 }
-:host .mat-mdc-radio-button:last-child{ border-bottom: 0; }
+:host .row:last-child{ border-bottom: 0; }
 
-/* Tipografía de la etiqueta */
-:host .mat-mdc-radio-button .mdc-label{
+/* Avatar circular con número */
+:host .avatar{
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--avatar-bg);
+  color: var(--avatar-fg);
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* Texto del sonido */
+:host .label{
   font-size: 16px;
   color: #1f2937;
 }
 
-/* Espacio entre círculo y texto */
-:host .mat-mdc-radio-button .mdc-radio{
-  margin-right: 12px;
-}
-
-/* Colores del radio en seleccionado (violeta) */
-:host .mat-mdc-radio-button{
+:host .row-radio{
+  margin: 0;
   --mdc-radio-selected-icon-color: var(--violet);
   --mdc-radio-selected-hover-icon-color: var(--violet);
   --mdc-radio-selected-focus-icon-color: var(--violet);
@@ -57,48 +62,33 @@
   --mat-radio-checked-ripple-color: var(--violet);
   --mat-radio-ripple-color: var(--violet);
 }
+:host .row-radio .mdc-label{ display:none; }
 
-/* ===== Footer acciones (alineado a la derecha) ===== */
 :host .dlg-actions{
-  display: flex;
+  display:flex;
   justify-content: flex-end;
   gap: 10px;
-  padding: 12px 24px 20px;
+  padding: 12px 24px 24px;
 }
 
-/* ===== Botones Ailarm (mismo estilo que en “días”) ===== */
 :host .ailarm-btn{
-  border-radius: 18px;
-  height: 42px;
-  padding: 0 18px;
-  font-weight: 700;
+  border-radius: 22px;
+  height: 44px;
+  padding: 0 20px;
+  font-weight: 800;
   text-transform: none;
-  line-height: 42px;
+  line-height: 44px;
 }
 
-/* Atrás: ghost (blanco con borde gris) */
-:host .ailarm-btn--ghost{
-  background: #fff;
-  border: 1px solid var(--btn-ghost-border);
-  color: #1f2937;
-  --mdc-outlined-button-outline-color: var(--btn-ghost-border);
+:host .ailarm-btn--outline{
+  background:#fff;
+  color: var(--btn-text);
+  border: 1px solid var(--btn-outline);
+  --mdc-outlined-button-outline-color: var(--btn-outline);
   --mdc-outlined-button-outline-width: 2px;
-  --mdc-outlined-button-label-text-color: #1f2937;
+  --mdc-outlined-button-label-text-color: var(--btn-text);
 }
-:host .ailarm-btn--ghost:hover{
-  background: var(--btn-ghost-hover);
+:host .ailarm-btn--outline:hover{
+  background: var(--btn-hover);
   border-color: #c7cad8;
-}
-
-/* Confirmar: blanco + borde + texto #3C3C3C */
-:host .ailarm-btn--save{
-  background: #fff;
-  color: var(--btn-save-text);
-  border: 1px solid var(--btn-ghost-border);
-  --mdc-outlined-button-outline-color: var(--btn-save-border);
-  --mdc-outlined-button-outline-width: 2px;
-  --mdc-outlined-button-label-text-color: var(--btn-save-text);
-}
-:host .ailarm-btn--save:hover{
-  background: var(--btn-save-hover);
 }

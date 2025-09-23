@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './sound-dialog.component.html',
   styleUrls: ['./sound-dialog.component.scss']
 })
+
 export class SoundDialogComponent {
   sounds = ['Sound 1','Sound 2','Sound 3','Sound 4','Sound 5','Sound 6','Sound 7'];
   selected: string;
@@ -22,6 +23,9 @@ export class SoundDialogComponent {
   ) {
     this.selected = data?.selected || 'Sound 1';
   }
+
+  /** Permite seleccionar la fila completa */
+  onRowClick(s: string) { this.selected = s; }
 
   confirm() { this.ref.close(this.selected); }
 }
