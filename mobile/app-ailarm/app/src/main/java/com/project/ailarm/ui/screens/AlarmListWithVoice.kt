@@ -59,7 +59,6 @@ fun RecordVoiceOverlay(
         animationSpec = tween(220, easing = FastOutSlowInEasing), label = "cardElev"
     )
 
-
     Box(
         modifier = Modifier
             .fillMaxSize()

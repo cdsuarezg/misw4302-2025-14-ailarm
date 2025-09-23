@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Ailarm</string>
+    <string name="material_timepicker_hour">Hora</string>
+    <string name="material_timepicker_minute">Minuto</string>
+    <string name="material_timepicker_hour_24h">Hora</string>
+    <string name="material_timepicker_minute_24h">Minuto</string>
 </resources>
