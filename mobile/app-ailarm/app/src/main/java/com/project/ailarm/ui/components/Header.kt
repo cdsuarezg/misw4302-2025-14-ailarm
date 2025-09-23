@@ -6,9 +6,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -19,23 +21,25 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.project.ailarm.R
-import com.project.ailarm.ui.theme.ActionIcon
 import com.project.ailarm.ui.theme.AppBarTitle
+import com.project.ailarm.ui.theme.BackgroundColor
+import com.project.ailarm.ui.theme.PrimaryColor
 import com.project.ailarm.ui.theme.TitleGray
-
-private val ScreenBg = Color(0xFFF6F6F6)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Header() {
+fun Header(
+    showAccountBtn: Boolean = false,
+    showBackBtn: Boolean = false
+) {
     CenterAlignedTopAppBar(
+        modifier = Modifier.padding(end = 20.dp, top = 30.dp),
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = ScreenBg,
+            containerColor = BackgroundColor,
             titleContentColor = MaterialTheme.colorScheme.onBackground
         ),
         title = {
@@ -60,17 +64,45 @@ fun Header() {
                 )
             }
         },
-        navigationIcon = {},
+        navigationIcon = {
+            if (showBackBtn) {
+                HoverIconButton(
+                    onClick = { },
+                    colors = IconButtonDefaults.iconButtonColors(
+                        contentColor = PrimaryColor,
+                        disabledContentColor = PrimaryColor
+                    )
+                ) {
+                    Icon(
+                        Icons.Filled.ArrowBackIosNew,
+                        contentDescription = "Regresar",
+                        modifier = Modifier
+                            .width(25.dp)
+                            .height(25.dp)
+                    )
+                }
+            }
+        },
         actions = {
-            HoverIconButton(
-                onClick = { },
-                colors = IconButtonDefaults.iconButtonColors(
-                    contentColor = ActionIcon,
-                    disabledContentColor = ActionIcon
-                )
-            ) {
-                Icon(Icons.Outlined.AccountCircle, contentDescription = "Perfil")
+            if (showAccountBtn) {
+                HoverIconButton(
+                    onClick = { },
+                    colors = IconButtonDefaults.iconButtonColors(
+                        contentColor = PrimaryColor,
+                        disabledContentColor = PrimaryColor
+                    )
+                ) {
+                    Icon(
+                        Icons.Filled.AccountCircle,
+                        contentDescription = "Perfil",
+                        modifier = Modifier
+                            .width(50.dp)
+                            .height(50.dp)
+                    )
+                }
             }
         }
     )
+
+    Spacer(modifier = Modifier.padding(bottom = 16.dp))
 }
