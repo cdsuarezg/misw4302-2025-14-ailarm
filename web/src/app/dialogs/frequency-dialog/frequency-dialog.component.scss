@@ -8,8 +8,6 @@
   --btn-ghost-hover:  #f7f7fb;
 
   --btn-save-text:   #3C3C3C;
-  --btn-save-border: #3C3C3C;
-  --btn-save-hover:  #f7f7fb;
   --list-ml: 25px;     
   --row-pl: 10px;     
   --avatar-col: 50px; 
@@ -103,17 +101,17 @@
   border-color: #c7cad8;
 }
 
-:host .ailarm-btn--save{
-  background: #fff;
-  color: var(--btn-save-text, #3C3C3C);
-  border: 1px solid var(--btn-ghost-border);                    
-  --mdc-outlined-button-outline-color: var(--btn-ghost-border); 
-  --mdc-outlined-button-outline-width: 2px;
-  --mdc-outlined-button-label-text-color: var(--btn-save-text, #3C3C3C);
-}
-:host .ailarm-btn--save:hover{
-  background: var(--btn-save-hover, #f7f7fb);
-}
+// :host .ailarm-btn--save{
+//   background: #fff;
+//   color: var(--btn-save-text, #3C3C3C);
+//   border: 1px solid var(--btn-ghost-border);                    
+//   --mdc-outlined-button-outline-color: var(--btn-ghost-border); 
+//   --mdc-outlined-button-outline-width: 2px;
+//   --mdc-outlined-button-label-text-color: var(--btn-save-text, #3C3C3C);
+// }
+// :host .ailarm-btn--save:hover{
+//   background: var(--btn-save-hover, #f7f7fb);
+// }
 
 :host .ailarm-btn--primary{
   background: #fff !important;

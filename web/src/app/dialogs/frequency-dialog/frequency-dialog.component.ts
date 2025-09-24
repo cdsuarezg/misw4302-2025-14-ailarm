@@ -33,10 +33,6 @@ export class FrequencyDialogComponent {
     this.ref.close(Array.from(this.selected).sort());
   }
 
-  all() {
-    this.selected = new Set([0,1,2,3,4,5,6]);
-  }
-
   onBack() {
     this.ref.close(null); // o this.ref.close() si prefieres
   }
