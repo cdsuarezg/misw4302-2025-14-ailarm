@@ -63,7 +63,7 @@ export class AlarmsComponent {
   }
 
   onAddAlarm(): void {
-    // Navegar a la página de agregar alarma
+    this.router.navigate(['/alarms/new']);
   }
 
   onAddAlarmWithAI(): void {
