@@ -16,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import com.project.ailarm.ui.theme.TextColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,7 +39,7 @@ fun DropdownField(
             value = value.orEmpty(),
             onValueChange = {},
             readOnly = true,
-            label = { Text(label) },
+            label = { Text(label, color = TextColor) },
             trailingIcon = {
                 Row {
                     ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)

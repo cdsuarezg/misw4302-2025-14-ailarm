@@ -28,6 +28,8 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.project.ailarm.ui.theme.PrimaryColor
+import com.project.ailarm.ui.theme.TextColor
 
 @Composable
 fun RecordVoiceOverlay(
@@ -89,7 +91,7 @@ fun RecordVoiceOverlay(
                     Text(
                         text = if (rec) "Escuchando..." else "Graba tu alarma",
                         style = MaterialTheme.typography.titleMedium,
-                        color = Color(0xFF2C2C2C)
+                        color = TextColor
                     )
                 }
 
@@ -98,7 +100,7 @@ fun RecordVoiceOverlay(
                 Text(
                     text = "Dime como quieres configurar tu alarma (hora, frecuencia, nombre y algún sonido preferido), por ejemplo: \"Quiero una alarma a las 8:00 p.m, todos los días con nombre 'descongelar pollo', con sonido alegre.\"",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color(0xFF4A4A4A)
+                    color = TextColor
                 )
 
                 Spacer(Modifier.height(20.dp))
@@ -106,11 +108,11 @@ fun RecordVoiceOverlay(
                 Crossfade(targetState = isRecording, label = "buttonsCrossfade") { rec ->
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                         if (rec) {
-                            TextButton(onClick = onBack) { Text("Atrás") }
-                            TextButton(onClick = onSave) { Text("Guardar") }
+                            TextButton(onClick = onBack) { Text("Atrás", color = PrimaryColor) }
+                            TextButton(onClick = onSave) { Text("Guardar", color = PrimaryColor) }
                         } else {
-                            TextButton(onClick = onCancel) { Text("Cancelar") }
-                            TextButton(onClick = onStart) { Text("Empezar grabación") }
+                            TextButton(onClick = onCancel) { Text("Cancelar", color = PrimaryColor) }
+                            TextButton(onClick = onStart) { Text("Empezar grabación", color = PrimaryColor) }
                         }
                     }
                 }
