@@ -1,0 +1,68 @@
+<div class="page">
+  <div class="header-grid">
+    <h2 class="title">Agregar alarma</h2>
+    <p class="helper">Completa los campos para configurar tu alarma</p>
+  </div>
+
+  <div class="form-grid">
+    <!-- Hora -->
+    <div class="label">Hora de alarma</div>
+    <mat-form-field appearance="outline" class="ailarm-field">
+      <input
+        matInput
+        [value]="time"
+        readonly
+        (click)="openTimePicker()"           
+      >
+      <button
+        mat-icon-button
+        matSuffix
+        aria-label="Seleccionar hora"
+        (click)="openTimePicker(); $event.stopPropagation()" 
+      >
+      <mat-icon>schedule</mat-icon>
+  </button>
+</mat-form-field>
+
+    <!-- Frecuencia -->
+    <div class="label">Frecuencia</div>
+    <mat-form-field appearance="outline" class="ailarm-field clickable"
+      (click)="pickFrequency()" role="button" tabindex="0">
+      <input matInput [value]="frequencyLabel" readonly />
+      <mat-icon matSuffix>expand_more</mat-icon>
+    </mat-form-field>
+
+    <!-- Etiqueta -->
+    <div class="label">Etiqueta</div>
+    <mat-form-field appearance="outline" class="ailarm-field">
+      <input matInput [(ngModel)]="label" placeholder="Ingrese etiqueta" />
+    </mat-form-field>
+
+    <!-- Sonido -->
+    <div class="label">Sonido</div>
+    <mat-form-field appearance="outline" class="ailarm-field clickable"
+      (click)="pickSound()" role="button" tabindex="0">
+      <input matInput [value]="sound" readonly />
+      <mat-icon matSuffix>expand_more</mat-icon>
+    </mat-form-field>
+
+    <!-- Acciones (centradas) -->
+    <div class="actions">
+       <button
+    mat-stroked-button
+    class="ailarm-btn ailarm-btn--ghost"
+    type="button"
+    (click)="cancel()">
+    Cancelar
+  </button>
+      <button
+    mat-raised-button
+    class="ailarm-btn ailarm-btn--primary"
+    type="button"
+    [disabled]="!isFormComplete"
+    (click)="save()">
+    Guardar
+  </button>
+    </div>
+  </div>
+</div>

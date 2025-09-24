@@ -1,0 +1,103 @@
+
+// Custom Theming for Angular Material v19
+// For more information: https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+@use 'sass:color';
+@use './styles/typography.scss';
+@use './styles/snackbar.scss';
+@use './styles/utils.scss';
+
+// Incluir el core de Angular Material
+@include mat.core();
+
+// Colores principales
+$primary-color: #3A506B;
+$secondary-color: #A29BFE;
+$accent-color: #9B59B6;
+$background-color: #F6F6F6;
+$text-color: #3C3C3C;
+$error-color: #D88C8C;
+$success-color: #6BCF7F;
+$warning-color: #FFD93D;
+
+html {
+  // Variables CSS personalizadas para sobrescribir los colores de Material
+  --mdc-theme-primary: #{$primary-color};
+  --mdc-theme-secondary: #{$accent-color};
+  --mdc-theme-surface: #{$background-color};
+  --mdc-theme-on-surface: #{$text-color};
+  --mdc-theme-error: #{$error-color};
+  
+  // Variables personalizadas para usar en componentes
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --accent-color: #{$accent-color};
+  --background-color: #{$background-color};
+  --text-color: #{$text-color};
+  --error-color: #{$error-color};
+  --success-color: #{$success-color};
+  --warning-color: #{$warning-color};
+  
+  // Colores con opacidad para efectos
+  --primary-light: #{color.adjust($primary-color, $lightness: 20%)};
+  --primary-dark: #{color.adjust($primary-color, $lightness: -20%)};
+  --accent-light: #{color.adjust($accent-color, $lightness: 20%)};
+  --accent-dark: #{color.adjust($accent-color, $lightness: -20%)};
+  
+  // Sombras personalizadas
+  --shadow-light: 0 2px 4px rgba(#{color.channel($primary-color, "red", $space: rgb)}, #{color.channel($primary-color, "green", $space: rgb)}, #{color.channel($primary-color, "blue", $space: rgb)}, 0.1);
+  --shadow-medium: 0 4px 8px rgba(#{color.channel($primary-color, "red", $space: rgb)}, #{color.channel($primary-color, "green", $space: rgb)}, #{color.channel($primary-color, "blue", $space: rgb)}, 0.15);
+  --shadow-heavy: 0 8px 16px rgba(#{color.channel($primary-color, "red", $space: rgb)}, #{color.channel($primary-color, "green", $space: rgb)}, #{color.channel($primary-color, "blue", $space: rgb)}, 0.2);
+
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$violet-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: (
+      brand-family: 'Roboto',
+      plain-family: 'Roboto',
+    ),
+    density: (
+      scale: 0,
+    ),
+  ));
+
+  @include mat.icon-overrides((
+    color: $primary-color,
+  ));
+
+  @include mat.chips-overrides((
+    outline-color: $secondary-color,
+    elevated-container-color: $secondary-color,
+    label-text-color: $text-color,
+  ));
+}
+
+// Estilos globales
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  padding: 1.5rem 3rem;
+}
+
+body { 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+.ailarm-dialog .mdc-dialog__surface,
+.ailarm-dialog .mat-mdc-dialog-surface {        
+  background: #fff !important;
+  border: 1px solid #000 !important;           
+  border-radius: 24px !important;               
+  overflow: hidden;                             
+  padding: 0;                                   
+}

@@ -1,0 +1,63 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  &-content {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-self: center;
+
+    &__logo {
+      width: 146px;
+      height: 137px;
+      object-fit: contain;
+    }
+
+    &__title {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: -30px;
+      
+      h1 {
+        margin: 0;
+        color: var(--text-color);
+        font-weight: 500;
+      }
+
+      h2 {
+        margin: 0;
+        color: var(--text-color);
+        opacity: 0.8;
+        font-weight: 400;
+      }
+    }
+  }
+
+  &-actions {
+    grid-column: 3;
+    display: flex;
+    align-items: center;
+    justify-self: end;
+
+    button {
+      height: 70px;
+      width: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .mat-icon {
+        height: 50px;
+        width: 50px;
+        color: var(--primary-color);
+      }
+
+      .material-icons {
+        font-size: 50px;
+      }  
+    }
+  }
+}

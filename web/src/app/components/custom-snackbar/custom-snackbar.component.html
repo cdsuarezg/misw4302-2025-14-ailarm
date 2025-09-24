@@ -1,0 +1,24 @@
+<div class="custom-snackbar">
+  <div class="custom-snackbar__content">
+    <span class="custom-snackbar__message">{{ data.message }}</span>
+    
+    <div class="custom-snackbar__actions">
+      <button 
+        *ngIf="data.action" 
+        mat-button 
+        class="custom-snackbar__action-btn"
+        (click)="onAction()">
+        {{ data.action }}
+      </button>
+      
+      <button 
+        *ngIf="data.showCloseIcon"
+        mat-icon-button 
+        class="custom-snackbar__close-btn"
+        (click)="onClose()"
+        aria-label="Cerrar">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

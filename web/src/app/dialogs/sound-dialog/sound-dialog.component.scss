@@ -1,0 +1,94 @@
+:host{
+  --violet: #A29BFE;         
+  --row-sep: #e9edf5;
+
+  --avatar-bg: #eaecf2;
+  --avatar-fg: #515a6b;
+
+  --btn-outline: #d1d5e5;
+  --btn-text:    #2f3136;
+  --btn-hover:   #f7f8fc;
+}
+
+:host .dlg-title{
+  text-align: left;
+  margin: 34px 12px 10px 36px;
+  padding: 0;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+/* Contenedor de la lista */
+:host .list{ margin: 0 8px; }
+:host .s-list{ display:block; }
+
+/* Fila tipo frecuencia: avatar | texto | radio (derecha) */
+:host .row{
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--row-sep);
+  cursor: pointer;
+}
+:host .row:last-child{ border-bottom: 0; }
+
+/* Avatar circular con número */
+:host .avatar{
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--avatar-bg);
+  color: var(--avatar-fg);
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* Texto del sonido */
+:host .label{
+  font-size: 16px;
+  color: #1f2937;
+}
+
+:host .row-radio{
+  margin: 0;
+  --mdc-radio-selected-icon-color: var(--violet);
+  --mdc-radio-selected-hover-icon-color: var(--violet);
+  --mdc-radio-selected-focus-icon-color: var(--violet);
+  --mdc-radio-selected-pressed-icon-color: var(--violet);
+  --mat-radio-checked-ripple-color: var(--violet);
+  --mat-radio-ripple-color: var(--violet);
+}
+:host .row-radio .mdc-label{ display:none; }
+
+:host .dlg-actions{
+  display:flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 24px 24px;
+}
+
+:host .ailarm-btn{
+  border-radius: 22px;
+  height: 44px;
+  padding: 0 20px;
+  font-weight: 800;
+  text-transform: none;
+  line-height: 44px;
+}
+
+:host .ailarm-btn--outline{
+  background:#fff;
+  color: var(--btn-text);
+  border: 1px solid var(--btn-outline);
+  --mdc-outlined-button-outline-color: var(--btn-outline);
+  --mdc-outlined-button-outline-width: 2px;
+  --mdc-outlined-button-label-text-color: var(--btn-text);
+}
+:host .ailarm-btn--outline:hover{
+  background: var(--btn-hover);
+  border-color: #c7cad8;
+}

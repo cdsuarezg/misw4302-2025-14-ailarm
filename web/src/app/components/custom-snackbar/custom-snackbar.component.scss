@@ -1,0 +1,79 @@
+.custom-snackbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  &__message {
+    flex: 1;
+    color: inherit;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__action-btn {
+    color: inherit !important;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    padding: 0 8px;
+    min-width: auto;
+    height: 32px;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  &__close-btn {
+    color: inherit !important;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: white;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+.ailarm-snackbar-success {
+  background-color: #7c4dff !important;  // violeta de tu paleta
+  color: #fff !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+
+  .custom-snackbar__message {
+    color: #fff !important;
+    font-size: 0.95rem;
+  }
+
+  .custom-snackbar__action-btn,
+  .custom-snackbar__close-btn mat-icon {
+    color: #fff !important;
+  }
+}

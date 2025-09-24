@@ -1,0 +1,24 @@
+<h2 class="dlg-title">Escoge la frecuencia de la alarma</h2>
+
+<div class="days-list" mat-dialog-content>
+  <button
+    type="button"
+    class="day-row"
+    *ngFor="let name of weekdays; let i = index; trackBy: trackByIndex"
+    (click)="toggle(i)">
+
+    <span class="avatar">{{ letters[i] }}</span>
+    <span class="label">{{ name }}</span>
+
+    <mat-checkbox
+      class="row-check"
+      [checked]="selected.has(i)"
+      (click)="$event.stopPropagation(); toggle(i)">
+    </mat-checkbox>
+  </button>
+</div>
+
+<div class="dlg-actions" mat-dialog-actions>
+  <button mat-stroked-button class="ailarm-btn ailarm-btn--ghost" (click)="onBack()">Atrás</button>
+  <button mat-stroked-button  class="ailarm-btn ailarm-btn--primary" (click)="confirm()">Confirmar</button>
+</div>

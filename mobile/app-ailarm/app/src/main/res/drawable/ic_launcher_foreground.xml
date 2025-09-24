@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- deja ~8dp de margen para que no lo recorte la máscara del launcher -->
+    <item>
+        <inset android:inset="8dp">
+            <bitmap
+                android:src="@drawable/ailarm_logo"
+                android:gravity="center"/>
+        </inset>
+    </item>
+</layer-list>
