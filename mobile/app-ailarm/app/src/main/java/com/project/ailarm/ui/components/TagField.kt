@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Close
@@ -22,6 +24,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.project.ailarm.ui.theme.SecondaryColor
 import com.project.ailarm.ui.theme.TextColor
@@ -51,6 +60,13 @@ fun TagField(
         onTagsChange(base)
     }
 
+    fun commitIfNeeded() {
+        if (text.isNotBlank()) {
+            commitTokens(text)
+            text = ""
+        }
+    }
+
     Column(modifier = modifier.fillMaxWidth()) {
         OutlinedTextField(
             value = text,
@@ -62,9 +78,26 @@ fun TagField(
                     text = new
                 }
             },
-            label = { Text(label) },
+            label = { Text(label, color = TextColor) },
             singleLine = true,
-            modifier = Modifier.fillMaxWidth()
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(
+                onDone = { commitIfNeeded() }
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .onPreviewKeyEvent { e ->
+                    if (e.type == KeyEventType.KeyDown &&
+                        (e.key == Key.Enter || e.key == Key.NumPadEnter)) {
+                        commitIfNeeded()
+                        true
+                    } else false
+                }
+                // cuando pierde el foco -> crear tag(s) con lo que quede
+                .onFocusChanged { state ->
+                    if (!state.isFocused) commitIfNeeded()
+                },
+
         )
 
         FlowRow(

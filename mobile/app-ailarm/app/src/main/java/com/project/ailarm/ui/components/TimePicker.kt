@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import com.project.ailarm.ui.theme.TextColor
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -41,7 +42,7 @@ fun TimePicker(
             value = time.format(formatter),
             onValueChange = {},
             readOnly = true,
-            label = { Text(label) },
+            label = { Text(label, color = TextColor) },
             trailingIcon = {
                 Icon(Icons.Outlined.AccessTime, contentDescription = "Seleccionar hora")
             },
